@@ -1,0 +1,71 @@
+﻿<div class="my-modal">
+    <TelerikRootComponent>
+
+        <GenericModalComponent Title="Administración - Datos de las Sucursales" IsVisible="modalStatus" Id="@IdModalIdentifier" OnModalClosed="HandleModalClosed" Width="50%" >
+        <ChildContent>
+                
+                <EditForm Model="@branchOfficeRequest" OnValidSubmit="HandleValidSubmit">
+                    
+                    <div class="row p-2">
+                        <!-- Parte Izquierda: Input y Label -->
+                        <div class="col-md-6">
+                            <InputModalComponent @ref="inputId" IsRequired="true" IsDisabled="true" InputValue="@IdBranchOffice" LabelText="ID" Placeholder="Número de identificación" FieldType="ValidationType.NumbersOnly" />
+                        </div>
+                        <!-- Parte Derecha: Dos Botones -->
+                        <div class="col-md-6 mt-4 ">
+                            <div class="text-end">
+                                <button class="botones limpiar" type="button" @onclick="ResetFormAsync">Limpiar</button>
+                                <button class="botones guardar" type="submit">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container mt-5">
+                        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; width: 100%; height: 100%;">
+                            
+
+                            <!-- Primera fila -->
+                            
+                                <div class="col-md-5">
+                                    <div class="cuadro-info">
+                                    <InputModalComponent @ref="inputCode" @bind-InputValue="branchOfficeRequest.Code" IsRequired="true" IsDisabled="@IsDisabledCode" LabelText="Código" Placeholder="Ingrese el código" FieldType="ValidationType.Code"  />
+                                        <InputModalComponent @ref="inputName" @bind-InputValue="branchOfficeRequest.NameOffice" IsRequired="true" LabelText="Nombre" Placeholder="Ingrese el nombre" FieldType="ValidationType.Name" />
+                                    </div>
+                                </div>
+
+                                <!-- Segunda columna -->
+                                <div class="col-md-5">
+                                    <div class="cuadro-info">
+                                    <InputModalComponent @ref="inputRegion" @bind-InputValue="branchOfficeRequest.Region" LabelText="Macro regional" Placeholder="Ingrese el macro regional" FieldType="ValidationType.None" />
+                                    <InputModalComponent @ref="inputTerritory" @bind-InputValue="branchOfficeRequest.Territory" LabelText="Territorio" Placeholder="Ingrese el territorio" FieldType="ValidationType.None" />
+                                    </div>
+                                </div>
+
+                                <!-- Tercera columna -->
+                                <div class="col-md-1">
+                                    <div class="cuadro-info">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Activo</label>
+                                        <div class="form-check form-switch ">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            
+
+                        </div>
+                    </div>
+                
+            </EditForm>
+
+             
+                
+            <ModalNotificationsComponent @ref="notificationModal" OnModalClosed="HandleModalNotiClose"></ModalNotificationsComponent>
+            
+
+            </ChildContent>
+        </GenericModalComponent>
+    </TelerikRootComponent>
+</div>
+
+

@@ -1,0 +1,93 @@
+﻿@page "/Series"
+@layout MenuLayout
+
+@using Telerik.DataSource;
+@using static ControlDoc.Models.Models.Administration.Response.SeriesDtoResponse;
+
+<div class="container-fluid mt-5">
+    <ModalSeries @ref="modalSeries" proOfficeID="IdproOffice" OnStatusUpdate="HandleChangedData"></ModalSeries>
+
+
+    <!-- Parte 1: Título y Contenido alineado a la izquierda -->
+    <div class="row">
+        <div class="col-8">
+            <h1>Administración - Series</h1>
+
+        </div>
+        <!-- Parte 2: Botón azul alineado a la derecha -->
+        <div class="col-4 text-end">
+            <button class="btn btn-primary btn-lg btn-block" @onclick="mostrarModal" disabled="@(esHabilitado)">Crear</button>
+        </div>
+    </div>
+    <div class="input-container">
+        <label for="input2">Seleccione una Oficina Productora*</label>
+    </div>
+    <div class="input-container">
+        <TelerikDropDownList Data="@productionOfficesList"
+                             ValueField="ProductionOfficeId"
+                             Value="@IdproOffice"
+                             TextField="Name"
+                             ValueChanged="@( (int newValue) => OnDropDownValueChanged(newValue) )">
+        </TelerikDropDownList>
+    </div>
+    <!-- Parte 3: Grilla -->
+    <div class="row mt-4">
+        <div class="col">
+     
+            <TelerikGrid Data="seriesList" PageSize="meta.pageSize"
+                         Sortable="true"
+                         FilterMode="GridFilterMode.FilterMenu"
+                         Resizable="true"
+                         Reorderable="true"
+                         EditMode="GridEditMode.Popup"
+                         SelectionMode="GridSelectionMode.None">
+                <GridColumns>
+
+                    <GridCommandColumn Width="80px" Title="Editar" HeaderClass="center-wrap" Visible="true">
+                        <GridCommandButton Icon="@SvgIcon.Pencil" OnClick="@((args)=> ShowModalEdit(args.Item as SeriesDtoResponse))"></GridCommandButton>
+                        <GridCommandButton Icon="@SvgIcon.Trash" OnClick="@((args)=> ShowModalDelete(args.Item as SeriesDtoResponse))"></GridCommandButton>
+                    </GridCommandColumn>
+                    <GridColumn Field="SeriesId"
+                                Title="ID"
+                                Width="150px"
+                                Filterable="true"
+                                TextAlign="ColumnTextAlign.Center"
+                                HeaderClass="center-wrap" />
+                    <GridColumn Field="ProductionOfficeName"
+                                Title="Oficina Productora"
+                                Width="150px"
+                                Filterable="true"
+                                TextAlign="ColumnTextAlign.Center"
+                                HeaderClass="center-wrap" />
+                    <GridColumn Field="Code"
+                                Title="Código"
+                                Width="150px"
+                                Filterable="true"
+                                TextAlign="ColumnTextAlign.Center"
+                                HeaderClass="center-wrap" />
+                    <GridColumn Field="Name"
+                                Title="Nombre de la Oficina"
+                                Width="150px"
+                                Filterable="true"
+                                TextAlign="ColumnTextAlign.Center"
+                                HeaderClass="center-wrap" />
+                    <GridColumn Field="ActiveState"
+                                Title="Estado"
+                                Width="150px"
+                                Filterable="true"
+                                TextAlign="ColumnTextAlign.Center"
+                                HeaderClass="center-wrap" />
+                </GridColumns>
+            </TelerikGrid>
+        </div>
+    </div>
+
+    <!-- Parte 4: Botones en la izquierda, centro y derecha -->
+    @if (dataChargue)
+    {
+        <PaginationComponent ObjectMeta="@seriesMeta" T="SeriesDtoResponse" OnPaginationRefresh="HandlePaginationGrid" Headers="@SeriesHeader"></PaginationComponent>
+    }
+    <ModalNotificationsComponent @ref="notificationModal" OnModalClosed="HandleModalNotiClose"></ModalNotificationsComponent>
+    <ModalNotificationsComponent @ref="notificationModalSucces"></ModalNotificationsComponent>
+
+</div>

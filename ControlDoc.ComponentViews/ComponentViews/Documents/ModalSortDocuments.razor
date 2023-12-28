@@ -1,0 +1,160 @@
+﻿@using ControlDoc.Models.Models.Administration.Response;
+
+<div class="my-modal">
+    <TelerikRootComponent>
+        <GenericModalComponent Title="Clasificar Documentos" IsVisible="modalStatus" Width="80%" OnModalClosed="HandleModalClosed">
+            <ChildContent>
+                <div class="row m-0 pb-10">
+                    <!-- dropdowns encargados de filtra la busqueda y el boton -->
+                    <div class="col-md-3 mt-4">
+                        <label for="input2" style="margin-bottom:6px;">Clase de Comunicación<span class="red">*</span></label>
+                        <TelerikDropDownList Data="@systemFieldsCLList"
+                                             ValueField="systemParamId"
+                                             Value="@systemParamCLId"
+                                             TextField="value"
+                                             Filterable="true"
+                                             DefaultText="Selecciona Clase">
+                        </TelerikDropDownList>
+                    </div>
+                    <div class="col-md-3 mt-4">
+                        <label for="input2" style="margin-bottom:6px;">Medio de envío<span class="red">*</span></label>
+                        <TelerikDropDownList Data="@systemFieldsMRList"
+                                             ValueField="systemParamId"
+                                             Value="@systemParamMRId"
+                                             TextField="value"
+                                             Filterable="true"
+                                             DefaultText="Seleccione medio de envío">
+                        </TelerikDropDownList>
+                    </div>
+                </div>
+                <div class="row m-0 pb-10">
+                    <div class="col-9">
+                        <div class="card row mt-3 col-12">
+                            <div class="col-6 d-flex flex-column justify-content-around" style="padding: 10px 20px 10px">
+                                <label class="mb-4"><b>Tipología Documental</b></label>
+                                <label><b>Tipología Documental: @TRDSelected.TypologyName</b></label>
+                                <label><b>Unidad Administrativa: @TRDSelected.AdministrativeUnitName</b></label>
+                                <label><b>Oficina Productora: @TRDSelected.ProductionOfficeName</b></label>
+                                <label><b>Serie: @TRDSelected.SeriesName</b></label>
+                                <label><b>Subserie: @TRDSelected.SubSeriesName</b></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 mt-3">
+                        <div class="col-6">
+                            <button class="btn btn-primary btn-lg btn-block btn-style" type="button" @onclick="OpenNewModalTRD">Buscar tipología</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-0 pb-10">
+                    <div class="col-9">
+                        <div class="card row mt-3 col-12">
+                            <div class="col-12 d-flex flex-column justify-content-around" style="padding: 10px 20px 10px">
+                                <TelerikGrid Data="@vUserList"
+                                             Sortable="true"
+                                             FilterMode="GridFilterMode.FilterMenu"
+                                             Resizable="true"
+                                             Reorderable="true"
+                                             EditMode="GridEditMode.Popup"
+                                             SelectionMode="GridSelectionMode.None"
+                                             RowHeight="60">
+                                    <GridColumns>
+                                        <GridColumn Width="10%">
+                                            <HeaderTemplate>
+                                                <label> Eliminar </label>
+                                            </HeaderTemplate>
+                                            <Template>
+                                                @{
+                                                    var UserSelected = context as VUserDtoResponse;
+
+                                                    <div class="mt-5">
+                                                        <TelerikCheckBox @bind-Value="@UserSelected.Selected">
+                                                        </TelerikCheckBox>
+                                                    </div>
+                                                }
+                                            </Template>
+                                        </GridColumn>
+                                        <GridColumn Width="45%" Filterable="true">
+                                            <HeaderTemplate>
+                                                <label> Usuario </label>
+                                            </HeaderTemplate>
+                                            <Template>
+                                                @{
+                                                    var UserSelected = context as VUserDtoResponse;
+
+                                                    // <div class="row">
+                                                    //         <div class="col">
+                                                    //             <div class="row">
+                                                    //                 <label><b>Tipología documental:</b> @UserSelected?.ProductionOfficeName</label>
+                                                    //             </div>
+                                                    //             <div class="row">
+                                                    //                 <label> <b>Version documental:</b> @docTypologySelected?.DocumentalVersionName</label>
+                                                    //             </div>
+                                                    //             <div class="row">
+                                                    //                 <label> <b>Unidad Administrativa:</b> @docTypologySelected?.AdministrativeUnitName</label>
+                                                    //             </div>
+                                                    //             <div class="row">
+                                                    //                 <label><b>Oficina productora:</b> @docTypologySelected?.ProductionOfficeName</label>
+                                                    //             </div>
+                                                    //             <div class="row">
+                                                    //                 <label><b>Serie:</b> @docTypologySelected?.SeriesName</label>
+                                                    //             </div>
+                                                    //             <div class="row">
+                                                    //                 <label><b>Sub-Serie:</b> @docTypologySelected?.SubSeriesName</label>
+                                                    //             </div>
+                                                    //         </div>
+                                                    //     </div>
+                                                }
+                                            </Template>
+                                        </GridColumn>
+                                        <GridColumn Width="45%" Filterable="true">
+                                            <HeaderTemplate>
+                                                <label> Cargo </label>
+                                            </HeaderTemplate>
+                                            <Template>
+                                                @{
+                                                    var UserSelected = context as VUserDtoResponse;
+                                                    <div class="card card-gestor">
+                                                        <div class="row d-flex align-items-center">
+                                                            <div class="col-md-2">
+                                                                <i class="bi bi-person-circle" style="font-size: 50px"></i>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="row">
+                                                                    <label><b>Nombre:</b> @UserSelected?.FullName</label>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <label> <b>Unidad Administrativa:</b> @UserSelected?.AdministrativeUnitName</label>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <label> <b>Oficina Productora:</b> @UserSelected?.ProductionOfficeName</label>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <label> <b>Cargo:</b> @UserSelected?.Charge</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </Template>
+                                        </GridColumn>
+                                    </GridColumns>
+                                </TelerikGrid>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 mt-3">
+                        <div class="col-7">
+                            <button class="btn btn-primary btn-lg btn-block btn-style" type="button" @onclick="OpenNewModalUser">Buscar destinatarios</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5 pb-10 justify-content-center">
+                    <div class="col-2">
+                        <button class="btn btn-primary btn-lg btn-block btn-style" type="button">Aceptar</button>
+                    </div>
+                </div>
+            </ChildContent>
+        </GenericModalComponent>
+    </TelerikRootComponent>
+</div>

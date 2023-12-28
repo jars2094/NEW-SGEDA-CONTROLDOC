@@ -1,0 +1,30 @@
+﻿@typeparam T
+<!-- Parte 4: Botones en la izquierda, centro y derecha -->
+<div class="row mt-4">
+    <div class="col-2">
+        <TelerikDropDownList Data="@dropdownOptions"
+                             ValueField="PageNumber"
+                             TextField="PageName"
+                             Value="@selectedPage"
+                             ValueChanged="@( (int newValue) => OnPageSelectedAsync(newValue) )">
+        </TelerikDropDownList>
+    </div>
+    <div class="col-8 text-center">
+
+        <!-- Botón izquierdo -->
+        <img src="@GetLeftButtonImage()" @onclick="GoToPreviousPage" class="clickable-image" />
+        @selectedPage / @totalPages
+        <!-- Botón derecho -->
+        <img src="@GetRightButtonImage()" @onclick="GoToNextPage" class="clickable-image" />
+        
+
+        
+        
+    </div>
+    <div class="col-2 text-end">
+        <a href="tu_url">
+            <img src="../img/botonExcel.svg" alt="Texto Alternativo" class="img-fluid">
+        </a>
+    </div>
+
+</div>

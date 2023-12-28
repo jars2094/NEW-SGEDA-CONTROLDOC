@@ -1,0 +1,90 @@
+﻿@page "/CreateDocuments"
+@using ControlDoc.ComponentViews.ComponentViews.GenericViews;
+@layout MenuLayout
+
+
+<ModalMasterFormatList @ref="masterFormatList"></ModalMasterFormatList>
+<ModalSortDocuments @ref="sortDocuments" OnStatusChangedTRD="HandleStatusChangedTRD" OnStatusChangedUser="HandleStatusChangedUser"></ModalSortDocuments>
+<GenericDocTypologySearchModal @ref="genericDocTypologySearchModal" title="Comunicaciones - Radicación de comunicación recibida"></GenericDocTypologySearchModal>
+<GenericSearchModal @ref="genericSearchModal"
+                    ConfigurationInUse="1"
+                    multipleSelection=false
+                    showCopiesColumn=false
+                    Title="Buscador de personas - Natural / Jurídica"></GenericSearchModal>
+<div class="container-fluid mt-1">
+    <div class="row titulo">
+        <div class="col-8">
+            <h3>Creación de Documentos</h3>
+        </div>
+    </div>
+    <div class="d-flex flex-xl-row flex-wrap pb-30">
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12" style="visibility: @panel_1">
+            <!-- Paso 1-->
+            <div class="d-flex flex-md-row flex-column mt-3">
+                <div class="col-md-2 d-flex justify-content-center pasos-mgt">
+                    <div class="numero"><h2>1</h2></div>
+                </div>
+                <div class="d-flex flex-column col-md-10 mx-3">
+                    <div class="col-md-12">
+                        <h4 class="mb-1">Crear Plantilla</h4>
+                        <label style="font-size: 13px">Selección y creación de plantilla</label>
+                    </div>
+                    <div class="col-md-3 mt-3">
+                        <button class="btn btn-primary btn-lg btn-block btn-style" type="button" @onclick="showModalMasterFormat">Crear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12" style="visibility: @panel_2">
+            <!-- Paso 2-->
+            <div class="d-flex flex-md-row flex-column mt-3">
+                <div class="col-md-2 d-flex justify-content-center pasos-mgt">
+                    <div class="numero"><h2>2</h2></div>
+                </div>
+                <div class="d-flex flex-column col-md-10 mx-3">
+                    <div class="col-md-12">
+                        <h4 class="mb-1">Clasificar documento</h4>
+                        <label style="font-size: 13px">Seleccionar tabla de retención documental</label>
+                    </div>
+                    <div class="col-md-4 mt-3">
+                        <button class="btn btn-primary btn-lg btn-block btn-style" type="button" @onclick="showModalSortDocs">Clasificar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12" style="visibility: @panel_3">
+            <!-- Paso 3-->
+            <div class="d-flex flex-md-row flex-column mt-3">
+                <div class="col-md-2 d-flex justify-content-center pasos-mgt">
+                    <div class="numero"><h2>3</h2></div>
+                </div>
+                <div class="d-flex flex-column col-md-10 mx-3">
+                    <div class="col-md-12">
+                        <h4 class="mb-1">Acción a realizar</h4>
+                        <label style="font-size: 13px">Seleccionar acción a realizar</label>
+                    </div>
+                    <div class="col-md-3 mt-3">
+                        <button class="btn btn-primary btn-lg btn-block btn-style" type="button">Acción</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12" style="visibility: @panel_4">
+            <!-- Paso 4-->
+            <div class="d-flex flex-md-row flex-column mt-3">
+                <div class="col-md-2 d-flex justify-content-center pasos-mgt">
+                    <div class="numero"><h2>4</h2></div>
+                </div>
+                <div class="d-flex flex-column col-md-10 mx-3">
+                    <div class="col-md-12">
+                        <h4 class="mb-1">Radicar</h4>
+                        <label style="font-size: 13px">Seleccionar acción a realizar</label>
+                    </div>
+                    <div class="col-md-3 mt-3">
+                        <button class="btn btn-primary btn-lg btn-block btn-style" type="button">Radicar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

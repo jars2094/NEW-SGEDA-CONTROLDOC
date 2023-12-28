@@ -1,0 +1,17 @@
+﻿.resend-link {
+    cursor: default;
+    color: grey;
+    text-decoration: none; 
+}
+
+    .resend-link.disabled {
+        pointer-events: none;
+    }
+
+    .resend-link.active {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        cursor: pointer;
+        
+    }

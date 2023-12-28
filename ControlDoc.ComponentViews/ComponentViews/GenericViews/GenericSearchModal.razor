@@ -1,0 +1,114 @@
+﻿@using ControlDoc.Models.Models.Administration.Response
+@using ControlDoc.Models.Models.SystemFields;
+
+@using ControlDoc.ComponentViews.ComponentViews.Search
+
+
+<div class="my-modal">
+
+    <TelerikRootComponent >
+        <GenericModalComponent Title=@Title IsVisible="modalStatus" OnModalClosed="HandleModalClosed" width="80%" >
+
+
+
+            @{
+
+
+                switch (ConfigurationInUse)
+                {
+                    //seleccion de usuarios
+                    case 1:
+                        <UserSearchComponent @ref="_userSearchComponet"
+                                             multipleSelection="@multipleSelection"
+                                             showCarge="@showCarge"
+                                             showParamTrdDdl="@showParamTrdDdl"
+                                             showCopiesColumn="@showCopiesColumn"
+                                             showNameField="@showNameField"
+                                             showLastNameField="@showLastNameField"
+                                             OnStatusChanged="UserModalOneSelection"
+                                             OnStatusChangedMultipleSelection="UserModalMultipleSelection">
+                        </UserSearchComponent>
+
+
+                        if (multipleSelection)
+                        {
+
+                            <div class="row">
+                                <button class="btn btn-primary btn-lg btn-block btn-style" @onclick="OnClickAssignUserData" type="button">Agregar</button>
+                            </div>
+
+                        }
+
+                        break;
+                    case 2:
+
+
+                    //seleccion de terceros
+                        <ThirdPartySearchComponent @ref="_thirdUserSearchComponet" 
+                                                   multipleSelection=@multipleSelection
+                                                   showCopiesColumn="@showCopiesColumn"
+                                                   OnStatusChanged="ThirdPartyModalOneSelection"
+                                                   OnStatusChangedMultipleSelection="ThirdPartyMultipleSelection">
+
+                        </ThirdPartySearchComponent>
+                        if (multipleSelection)
+                        {
+                        <div class="row">
+                                <button class="btn btn-primary btn-lg btn-block btn-style" @onclick="OnClickAssignThirdPartyData" type="button">Agregar</button>
+                        </div>
+                        }
+                        break;
+                    case 3:
+                    //radicacion enviada
+                        <TelerikTabStrip PersistTabContent="true">
+                            <TabStripTab Title="Destinatario*" >
+                                <UserSearchComponent @ref="_userSearchComponet"
+                                                     multipleSelection="true"
+                                                     showCarge="true"
+                                                     showParamTrdDdl="true"
+                                                     showCopiesColumn="true"
+                                                     showNameField="true"
+                                                     showLastNameField="true"
+                                                     OnStatusChangedMultipleSelection="RecipientList">
+                                </UserSearchComponent>
+                            </TabStripTab>
+
+                            <TabStripTab Title="Remitente*">
+                                <ThirdPartySearchComponent @ref="_thirdUserSearchComponet"
+                                                           multipleSelection="true"
+                                                           showCopiesColumn="true"
+                                                           OnStatusChangedMultipleSelection="SenderList">
+
+                                </ThirdPartySearchComponent>
+                            </TabStripTab>
+                        </TelerikTabStrip>
+
+                        <div class="row">
+                            <button class="btn btn-primary btn-lg btn-block btn-style" @onclick="OnClickAssignRadication" type="button">Agregar</button>
+                        </div>
+                        break;
+
+                }
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </GenericModalComponent>
+
+
+    </TelerikRootComponent>
+    <ModalNotificationsComponent @ref="notificationModal" OnModalClosed="HandleModalNotiClose"></ModalNotificationsComponent>
+</div>
+

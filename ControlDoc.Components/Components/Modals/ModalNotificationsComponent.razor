@@ -1,0 +1,107 @@
+﻿@using ControlDoc.Models.Models.Generic;
+@using Microsoft.JSInterop;
+@* Suponiendo que tienes parámetros como estos en tu componente *@
+@code {
+
+    public enum ModalType
+    {
+        Error,
+        Success,
+        Delete
+    }
+    [Parameter] public ModalType Type { get; set; } = ModalType.Error;
+    [Parameter] public string Message { get; set; } = "";
+    [Parameter] public string ButtonText { get; set; } = "";
+    [Parameter] public string IdModal { get; set; } = "";
+    [Parameter] public bool Visible { get; set; } = false;
+    [Inject] private IJSRuntime Js { get; set; }
+    [Parameter]
+    public EventCallback<ModalClosedEventArgs> OnModalClosed { get; set; }
+
+
+    private bool IsDeleted = false;
+}
+<div id="Modal-Notificaciones" style="display: none;">
+    <TelerikWindow Class="demo-window"
+                   Modal=true
+                   Width="886px"
+                   Height="257px"
+                   Centered="true"
+                   Visible="Visible"
+                   Draggable="false">
+
+        <WindowContent>
+            <div style="position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; width: 100%;">
+                <!-- Espacio para la imagen, que varía según el tipo de modal -->
+                <div style="flex-grow: 0;">
+                    <img src="@GetIconPath(Type)" style="display: block; margin-bottom: 20px; max-width: 50px; height: 50px;" />
+                </div>
+
+                <!-- Contenedor del texto -->
+                <div style="flex-grow: 0; text-align: center;">
+                    <div style="color: #41BAEA; font-size: 36px; font-family: Roboto; font-weight: 700; line-height: 32px; word-wrap: break-word">
+                        @Message
+                    </div>
+                </div>
+
+                <!-- Botones al lado del texto y centrados horizontalmente -->
+                <div style="flex-grow: 0; display: flex; flex-direction: row; align-items: center; margin-top: 20px;">
+                    <button @onclick="() => CloseModal(true)" style="border:none; padding: 10px 25px; background: #2196F3; border-radius: 8px; color: white; font-size: 16px; font-family: Roboto; font-weight: 400; line-height: 32px; word-wrap: break-word">
+                        @ButtonText
+                    </button>
+
+                    @if (Type == ModalType.Delete)
+                    {
+                        <button @onclick="() => CloseModal(false)" style="border:none; padding: 10px 25px; background: #FF5722; border-radius: 8px; color: white; font-size: 16px; font-family: Roboto; font-weight: 400; line-height: 32px; word-wrap: break-word; margin-left: 10px;">
+                            Cancel
+                        </button>
+                    }
+                </div>
+            </div>
+            <!-- Imagen en la esquina inferior derecha -->
+            <img src="../img/maskGroup.svg" style="position: absolute; bottom: 0; right: 0; max-width: 100px; height: auto;" />
+        </WindowContent>
+    </TelerikWindow>
+</div>
+
+
+@* Método para obtener la ruta de la imagen según el tipo de modal *@
+@functions {
+    private string GetIconPath(ModalType modalType)
+    {
+        switch (modalType)
+        {
+            case ModalType.Error:
+                return "../img/iconoModalError.svg"; // Cambiar a la ruta correcta si es necesario
+            case ModalType.Success:
+                return "../img/iconoModalExitoso.svg"; // Cambiar a la ruta correcta si es necesario
+            case ModalType.Delete:
+                return "../img/iconoModalError.svg"; // Ruta para el nuevo tipo "borrar"
+            default:
+                return "../img/iconoModalError.svg"; // O alguna imagen predeterminada
+        }
+    }
+    public void UpdateModal(ModalType type, string message, string buttonText, bool visible)
+    {
+        Type = type;
+        Message = message;
+        ButtonText = buttonText;
+        Visible = visible;
+        StateHasChanged();
+    }
+
+
+
+    private async Task CloseModal(bool value)
+    {
+        var args = new ModalClosedEventArgs
+            {
+                IsAccepted = value,
+                IsCancelled = !value,
+                ModalStatus = false
+    };
+
+        await OnModalClosed.InvokeAsync(args);
+        Visible = false;
+    }
+}

@@ -1,0 +1,113 @@
+﻿@using ControlDoc.Models.Models.Administration.Response;
+
+
+<div class="my-modal">
+    <TelerikRootComponent>
+
+        <GenericModalComponent Title="Administración - Datos de la Organización" IsVisible="modalStatus" OnModalClosed="HandleModalClosed">
+            <ChildContent>
+                <EditForm Model="@CompaniesFormResponse" OnValidSubmit="HandleValidSubmit">
+
+                    <div class="row p-2">
+                        <!-- Parte Izquierda: Input y Label -->
+                        <div class="col-md-6">
+                            @*    <InputModalComponent IsVisible=true @ref ="inputIdC" IsRequired="true" LabelText="ID" Placeholder="Número de identificación" FieldType="ValidationType.NumbersOnly" /> *@
+                        </div>
+                        <!-- Parte Derecha: Dos Botones -->
+                        <div class="col-md-6 mt-4 ">
+                            <div class="text-end">
+                                <button class="botones limpiar" type="button" @onclick="ResetFormAsync">Limpiar</button>
+                                <button class="botones guardar" type="submit">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container mt-5">
+                        <div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+
+                            <!-- Sección 1 -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="cuadro-info">
+
+
+                                        <label for="input2" style="margin-bottom:6px;">Tipo de Documento <span class="red">*</span></label>
+                                        <TelerikDropDownList Data="@DocumentTypeTDIJ"
+                                        @bind-Value="@MySelectedIdSystemFieldsJuridico"
+                                                             Id="DocTypeJ"
+                                                             DefaultText="@textTDIJ"
+                                                             TextField="value"
+                                                             ValueField="code"
+                                                             Filterable="true"
+                                                             FilterOperator="StringFilterOperator.Contains">
+                                        </TelerikDropDownList>
+
+                                        <InputModalComponent IsVisible=true @ref ="NITinput" @bind-InputValue="@CompaniesFormResponse.Identification" IsRequired="true" LabelText="NIT" Placeholder="Número de NIT" FieldType="ValidationType.NumbersOnly" />
+                                        <div>
+                                            <label for="input2">Dirección*</label>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <input type="text" @bind-value="textAddress" class="form-control" style="border: 1px solid #e0e0e0;" readonly placeholder="Dirección" aria-label="Dirección" aria-describedby="basic-addon2" @onclick="OpenNewModal">
+                                            <span class="input-group-text button-like" id="basic-addon2" @onclick="OpenNewModal">+</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="cuadro-info">
+                                        <InputModalComponent IsVisible=true @ref ="namebussinessinput" @bind-InputValue="@CompaniesFormResponse.BusinessName" IsRequired="true" LabelText="Razón social" Placeholder="Razón social" FieldType="ValidationType.NotEmpty" />
+                                        <InputModalComponent IsVisible=true @ref ="emailInput" @bind-InputValue="@CompaniesFormResponse.Email" IsRequired="true" LabelText="Correo electrónico" Placeholder="Correo electrónico" FieldType="ValidationType.Email" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="cuadro-info">
+                                        <InputModalComponent IsVisible=true @ref ="telefonoInput" @bind-InputValue="@CompaniesFormResponse.PhoneNumber" IsRequired="true" LabelText="Teléfono" Placeholder="Teléfono" FieldType="ValidationType.NumbersOnly" />
+                                        <InputModalComponent IsVisible=true @ref ="webInput" @bind-InputValue="@CompaniesFormResponse.WebAddress" IsRequired="true" LabelText="Página web" Placeholder="Página web" FieldType="ValidationType.Website" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sección 2 -->
+                            <div class="separador">
+                                <h3>Datos del representante legal</h3>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="cuadro-info">
+
+                                            <label for="input2" style="margin-bottom:6px;">Tipo de Documento <span class="red">*</span></label>
+                                            <TelerikDropDownList Data="@DocumentTypeTDIN"
+                                            @bind-Value="@MySelectedIdSystemFieldsNatural"
+                                                                 Id="DocTypeN"
+                                                                 DefaultText="@textTDIN"
+                                                                 TextField="value"
+                                                                 ValueField="code"
+                                                                 Filterable="true"
+                                                                 FilterOperator="StringFilterOperator.Contains">
+                                            </TelerikDropDownList>
+                                            <InputModalComponent IsVisible=true @ref ="CelularInput" @bind-InputValue="@CompaniesFormResponse.CellPhoneNumber" IsRequired="true" LabelText="Celular" Placeholder="Número de celular" FieldType="ValidationType.NumbersOnly" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="cuadro-info">
+                                            <InputModalComponent IsVisible=true @ref ="numIdentificationInput" @bind-InputValue="@CompaniesFormResponse.LegalAgentId" IsRequired="true" LabelText="Número de identificación" Placeholder="Número de identificación" FieldType="ValidationType.NumbersOnly" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="cuadro-info">
+                                            <InputModalComponent IsVisible=true @ref ="NameAgentLegalInput" @bind-InputValue="@CompaniesFormResponse.LegalAgentFullName" IsRequired="true" LabelText="Nombre completo" Placeholder="Nombre completo" FieldType="ValidationType.None" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </EditForm>
+
+                <ModalNotificationsComponent @ref="notificationModal" OnModalClosed="HandleModalNotiClose"></ModalNotificationsComponent>
+            </ChildContent>
+        </GenericModalComponent>
+    </TelerikRootComponent>
+</div>

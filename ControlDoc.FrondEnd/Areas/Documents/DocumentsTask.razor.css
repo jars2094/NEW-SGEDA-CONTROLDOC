@@ -1,0 +1,10 @@
+﻿.pat-button {
+    padding-top: 32px;
+}
+
+.botones-limpiar {
+    border: 1px solid #2196F3;
+    background: #fff;
+    color: #2C2C2C;
+    border-radius: 8px;
+}

@@ -1,0 +1,69 @@
+﻿@page "/ProfileUsers"
+@layout MenuLayout
+
+@using System.Text.Json;
+@using Telerik.DataSource;
+
+<ModalProfileUsers @ref="modalProfileUsers" Id="Modal-Profile-Users" OnStatusChanged="HandleStatusChanged" OnChangeData="HandleRefreshGridData" CrearEditar="CrearEditar"></ModalProfileUsers>
+
+<div class="container-fluid mt-5">
+    <!-- Parte 1: Título y Contenido alineado a la izquierda -->
+    <div class="row">
+        <div class="col-8">
+            <h1>Administración - Perfiles de Funcionarios</h1>
+
+        </div>
+        <!-- Parte 2: Botón azul alineado a la derecha -->
+        <div class="col-4 text-end">
+            <button class="btn btn-primary btn-lg btn-block" @onclick="ShowModal">Crear</button>
+        </div>
+    </div>
+
+    <!-- Parte 3: Grilla -->
+    <div class="row mt-4">
+        <div class="col">
+
+            <TelerikGrid Data="ProfileUsersList" PageSize="meta.pageSize"
+                         Sortable="true"
+                         FilterMode="GridFilterMode.FilterMenu"
+                         Resizable="true"
+                         Reorderable="true"
+                         EditMode="GridEditMode.Popup"
+                         SelectionMode="GridSelectionMode.None">
+                <GridColumns>
+
+                    <GridCommandColumn Width="80px" Title="Acciones" HeaderClass="center-wrap" Visible="true">
+                        <GridCommandButton Icon="@SvgIcon.Pencil" OnClick="@((args)=> ShowModalEdit(args.Item as ProfileUsersDtoResponse))"></GridCommandButton>
+                        <GridCommandButton Icon="@SvgIcon.Trash" OnClick="@((args) => HandleRecordToDelete(args.Item as ProfileUsersDtoResponse))"></GridCommandButton>
+                    </GridCommandColumn>
+                    <GridColumn Field=@nameof(ProfileUsersDtoResponse.ProfileCode) Title="Codigo" Width="100px" Filterable="true" />
+                    <GridColumn Field=@nameof(ProfileUsersDtoResponse.Profile1) Title="Nombre" Width="100px" Filterable="true" />
+                    <GridColumn Field=@nameof(ProfileUsersDtoResponse.ActiveState) Title="Estado" Width="100px" Filterable="true">
+                        <Template>
+                            @{
+                                ProfileUsersDtoResponse rowData = context as ProfileUsersDtoResponse;
+                                if (rowData != null)
+                                {
+                                    bool isActive = rowData.ActiveState;
+                                    string statusText = isActive ? "Activo" : "Inactivo";
+                                    @statusText
+                                }
+                            }
+                        </Template>
+                    </GridColumn>
+                    <GridColumn Field=@nameof(ProfileUsersDtoResponse.CreateUser) Title="Usuario Grabo" Width="100px" Filterable="true" />
+                    <GridColumn Field=@nameof(ProfileUsersDtoResponse.CreateDate) Title="Fecha Grabo" Width="100px" Filterable="true" />
+
+                </GridColumns>
+            </TelerikGrid>
+
+
+        </div>
+    </div>
+
+    <!-- Parte 4: Botones en la izquierda, centro y derecha -->
+    <PaginationComponent ObjectMeta="meta" T="ProfileUsersDtoResponse" OnPaginationRefresh="HandlePaginationGrid"></PaginationComponent>
+
+</div>
+<ModalNotificationsComponent @ref="notificationModal" OnModalClosed="HandleModalNotiCloseAsync"></ModalNotificationsComponent>
+<ModalNotificationsComponent @ref="notificationModalSucces"></ModalNotificationsComponent>

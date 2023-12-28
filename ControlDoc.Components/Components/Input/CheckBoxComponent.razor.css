@@ -1,0 +1,4 @@
+﻿
+input[type="checkbox"]:checked + .form-check-label {
+    background-color: green; /* Cambia el color de fondo a tu elección */
+}

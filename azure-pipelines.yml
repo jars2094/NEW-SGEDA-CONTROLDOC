@@ -1,0 +1,109 @@
+trigger:
+
+- main
+
+pool:
+  name: server-docker
+
+steps:
+
+# Restore
+- task: DotNetCoreCLI@2
+  displayName: Restauración de Repositorio
+  inputs:
+    command: 'restore'
+    restoreSolution: '**/*.sln'
+    feedsToUse: 'config'
+    nugetConfigPath: 'nuget.config'
+    externalFeedCredentials: 'Telerik'
+
+# # Prepare analisis
+# - task: SonarQubePrepare@5
+#   displayName: Preparar Sonarqube
+#   inputs:
+#     SonarQube: 'sonarqube'
+#     scannerMode: 'MSBuild'
+#     projectKey: '$(Build.Repository.Name)'
+#     projectName: '$(Build.Repository.Name)'
+
+# Build
+- task: DotNetCoreCLI@2
+  displayName: Compilar
+  inputs:
+    command: "build"
+    arguments: '. -c Release -o ./app/build'
+
+# Test
+- task: DotNetCoreCLI@2
+  displayName: Testear
+  inputs:
+    command: 'test'
+    projects: '**/*Tests*.csproj'
+
+# Publish
+- task: DotNetCoreCLI@2
+  displayName: Publicar
+  inputs:
+    command: 'publish'
+    # project: 'ControlDoc.FrondEnd/ControlDoc.FrondEnd.csproj'
+    arguments: '-o ./app/publish/ /p:UseAppHost=false'  
+    
+# Extract Zip
+- task: ExtractFiles@1
+  displayName: Extraer Zip
+  inputs:
+    archiveFilePatterns: './app/publish/ControlDoc.FrondEnd.zip'
+    destinationFolder: './app/image'
+    cleanDestinationFolder: true
+
+# - task: Bash@3
+#   inputs:
+#     targetType: 'inline'
+#     script: 'ls -al ./app/image'
+
+# - task: Bash@3
+#   inputs:
+#     targetType: 'inline'
+#     script: 'ls -al ./app/image/wwwroot'
+
+# - task: Bash@3
+#   inputs:
+#     targetType: 'inline'
+#     script: 'ls -al ./app/image/wwwroot/img/Menu'
+
+# - task: Bash@3
+#   inputs:
+#     targetType: 'inline'
+#     script: 'ls -al ./app/publish'
+
+# - script: |
+#     FILTERED_PARAMS=$(echo $SONARQUBE_SCANNER_PARAMS | sed 's/"sonar.branch.name":"[^"]*"\,//g')
+#     echo "##vso[task.setvariable variable=SONARQUBE_SCANNER_PARAMS]$FILTERED_PARAMS"
+#   displayName: Filter out non-CE sonar parameters
+  
+# # Run Code Analysis task
+# - task: SonarQubeAnalyze@5
+#   displayName: Analizar Sonarqube
+
+# # Publish Quality Gate Result task
+# - task: SonarQubePublish@5
+#   displayName: Publicar Sonarqube
+#   inputs:
+#     pollingTimeoutSec: '300'
+
+# Publish Docker Image
+- task: Bash@3
+  displayName: Generar Imagen Docker
+  inputs:
+    targetType: 'inline'
+    script: |
+       docker build . -t $(Build.Repository.Name):$(Build.BuildId)
+       sed -i 's/TAG/$(Build.BuildId)/g' docker-compose.yml
+
+# Run Docker Container
+- task: Bash@3
+  displayName: Ejecutar Contenedor Docker
+  inputs:
+    targetType: 'inline'
+    script: |
+       docker-compose up -d

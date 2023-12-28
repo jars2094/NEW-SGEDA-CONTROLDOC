@@ -1,0 +1,35 @@
+﻿
+
+/*#region Botones Limpiar/Guardar*/
+.botones {
+    width: 48%;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    border-width: 2px;
+    border-style: solid;
+    text-align: center;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+    .botones.guardar {
+        background: #2196F3;
+        color: #fff;
+        border: 1px solid #2196F3;
+        width: 100%;
+    }
+
+    .botones.limpiar {
+        border: 1px solid #2196F3;
+        background: #fff;
+        color: #2C2C2C;
+        width: 100%;
+        position: flex;
+        justify-content: center;
+    }
+
+
+/*#endregion */

@@ -1,0 +1,20 @@
+﻿
+<TelerikChart>
+    <ChartTitle Visible="@ChartTitleVisible" Text="@ChartTitleText"></ChartTitle>
+    <ChartLegend Visible="@ChartLegendVisible" Position="@filterOperator"></ChartLegend>
+
+    <ChartSeriesItems>
+        <ChartSeries Type="ChartSeriesType.Donut"
+                     ColorField="@ColorField"
+                     Data="@Data"
+                     Field="@nameof(ValueField)"
+                     CategoryField="@nameof(TextField)">
+            <ChartSeriesTooltip Visible="@ChartSeriesTooltipVisible" Context="item">
+            </ChartSeriesTooltip>
+            <ChartSeriesLabels Position="ChartSeriesLabelsPosition.OutsideEnd"
+                               Visible="@ChartSeriesLabelsVisible"
+                               Background="transparent">
+            </ChartSeriesLabels>
+        </ChartSeries>
+    </ChartSeriesItems>
+</TelerikChart>

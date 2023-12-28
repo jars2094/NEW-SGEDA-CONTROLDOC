@@ -1,0 +1,119 @@
+﻿@page "/ImportTDRTVD"
+@using System.Text.Json;
+@using ControlDoc.Components.Components.DropDownListTelerik
+@using ControlDoc.Components.Components.Grids
+@layout MenuLayout
+
+<ModalImportTDR_TVD @ref="_modalImportTDR_TVD" OnChangeData="HandleRefreshGridDataImport"></ModalImportTDR_TVD>
+
+
+
+<div class="container-fluid mt-5">
+    <!-- Parte 1: Título y Contenido alineado a la izquierda -->
+    <div class="row">
+        <div class="col-8">
+            <h1>Importador TDR / TVD</h1>
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-mt-10">
+            <p>En este módulo se puede realizar el cargue de TDR / TVD al sistema ControlDoc SGDEA de forma Automatizada </p>
+        </div>
+        <div class="col-mt-2 text-end ">
+
+            <button class="btn btn-primary btn-lg btn-block" @onclick="MostrarModalImport">Cargar</button>
+           
+        </div>
+    </div>
+</div>
+
+<!-- Parte 3: DropdownList Telerik -->
+
+<div class="row mt-3">
+
+
+
+    <!-- Parte 3: Grilla -->
+
+    <div class="col">
+
+
+        <TelerikGrid Data="Data" PageSize="10"
+                     Sortable="true"
+                     FilterMode="GridFilterMode.FilterMenu"
+                     Resizable="true"
+                     Reorderable="true"
+                     EditMode="GridEditMode.Popup"
+                     SelectionMode="GridSelectionMode.None">
+            <GridColumns>
+                <GridCommandColumn Width="80px" Title="Acciones" HeaderClass="center-wrap" Visible="true">
+                    @* <GridCommandButton Icon="@SvgIcon.FormElement" Title="Detalles" OnClick="@((args)=> ShowModalEdit(args.Item as PermissionDtoResponse))"></GridCommandButton> *@
+                    @*  <GridCommandButton Icon="@SvgIcon.FormElement" Title="Detalles"></GridCommandButton> *@
+                </GridCommandColumn>
+                <GridColumn Field="Descripcion"
+                            Title="Descripcion"
+                            Width="150px"
+                            Filterable="true"
+                            TextAlign="ColumnTextAlign.Center"
+                            HeaderClass="center-wrap" />
+                <GridColumn Field="Estado"
+                            Title="Estado"
+                            Width="150px"
+                            Filterable="true"
+                            TextAlign="ColumnTextAlign.Center"
+                            HeaderClass="center-wrap" />
+                <GridColumn Field="Detalle"
+                            Title="Detalle"
+                            Width="150px"
+                            Filterable="true"
+                            TextAlign="ColumnTextAlign.Center"
+                            HeaderClass="center-wrap" />
+                <GridColumn Field="NombreArchivo"
+                            Title="Archivo"
+                            Width="150px"
+                            Filterable="true"
+                            TextAlign="ColumnTextAlign.Center"
+                            HeaderClass="center-wrap" />
+                <GridColumn Field="NumeroRegistro"
+                            Title="Numero"
+                            Width="150px"
+                            Filterable="true"
+                            TextAlign="ColumnTextAlign.Center"
+                            HeaderClass="center-wrap" />
+
+
+            </GridColumns>
+            <NoDataTemplate>
+                <strong>No Data available / The data is still loading...</strong>
+            </NoDataTemplate>
+        </TelerikGrid>
+
+    </div>
+
+
+    <!-- Parte 4: Botones en la izquierda, centro y derecha -->
+    <div class="row mt-4">
+        <div class="col-4">
+            <button class="btn btn-secondary">Botón Izquierda</button>
+        </div>
+        <div class="col-4 text-center">
+            <a href="tu_url">
+                <img src="../img/paginación.svg" alt="Texto Alternativo" class="img-fluid">
+            </a>
+        </div>
+        <div class="col-4 text-end">
+            <a href="tu_url">
+                <img src="../img/botón_excel.svg" alt="Texto Alternativo" class="img-fluid">
+            </a>
+        </div>
+    </div>
+    @*  <ModalNotificationsComponent @ref="notificationModal" OnModalClosed="HandleModalNotiClose"></ModalNotificationsComponent>
+    <ModalNotificationsComponent @ref="notificationModalSucces" OnModalClosed="HandleModalNotiClose"></ModalNotificationsComponent> *@
+</div>
+
+
+
+
+

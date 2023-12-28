@@ -1,0 +1,27 @@
+﻿
+@*<TelerikDatePicker @bind-Value="@PickerValue" @ref="Picker">
+    <HeaderTemplate>
+
+        <span>
+            <TelerikButton OnClick="@GoToPrevious" Icon="chevron-left">
+               
+
+            </TelerikButton>
+
+
+
+            <TelerikButton OnClick="@GoToNext" Icon="chevron-right">
+            
+
+            </TelerikButton>
+        </span>
+
+    </HeaderTemplate>
+</TelerikDatePicker>*@
+
+<TelerikDatePicker Id="customDatePicker" @bind-Value="datePickerValue"
+                   Format="dd MMMM yyyy"
+                   Min="@Min" Max="@Max">
+    
+</TelerikDatePicker>
+

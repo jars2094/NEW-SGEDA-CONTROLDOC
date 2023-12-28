@@ -1,0 +1,140 @@
+﻿@page "/Audit"
+@layout MenuLayout
+
+<div class="container-fluid mt-5">
+    <!-- Parte 1: Título y Contenido alineado a la izquierda -->
+    <div class="row">
+        <div class="col-8">
+            <h1>Administración - Auditoria</h1>
+
+        </div>
+        
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            <InputModalComponent @ref="detailInput"  @bind-InputValue="detail" LabelText="Contiene" Placeholder=""/>
+        </div>
+        <div class="col-3">
+            <label class="mb-2">Desde</label>
+            <TelerikDatePicker @bind-Value="@from"
+                               Format="MM/dd/yyyy"
+
+                               ShowWeekNumbers="false">
+            
+            </TelerikDatePicker>
+        </div>
+        <div class="col-3">
+            <label class="mb-2" >Hasta</label>
+            <TelerikDatePicker @bind-Value="@to"
+
+                               Format="MM/dd/yyyy"
+                               ShowWeekNumbers="false">
+       
+            </TelerikDatePicker>
+        </div>
+        <div class="col-3">
+
+
+            <button class="btn btn-ligth  btn-md btn-outline-primary  " onclick="@OnClickReset">Limpiar</button>
+            <button class=" btn btn-primary btn-md btn-block " onclick="@OnClickSearch">Buscar</button>
+        </div>
+    </div>
+
+
+    <!-- Parte 3: Grilla -->
+    <div class="row mt-4">
+        <div class="col">
+
+
+            <TelerikGrid Data="vWLogsAuditDtoBugList" PageSize="meta.pageSize"
+                         Sortable="true"
+                         FilterMode="GridFilterMode.FilterMenu"
+                         Resizable="true"
+                         Reorderable="true"
+                         EditMode="GridEditMode.Popup"
+                         SelectionMode="GridSelectionMode.None">
+                <GridColumns>
+                    <GridColumn Field="Date"
+                                Title="Fecha"
+                                Width="10%"
+                                Filterable="true"
+                                TextAlign="ColumnTextAlign.Center"
+                                HeaderClass="center-wrap" />
+                    <GridColumn Field="LogType"
+                                Title="Tipo de auditoria"
+                                Width="10%"
+                                Filterable="true"
+                                TextAlign="ColumnTextAlign.Center"
+                                HeaderClass="center-wrap" />
+                    <GridColumn Field="Ip"
+                                Title="IP"
+                                Width="10%"
+                                Filterable="true"
+                                TextAlign="ColumnTextAlign.Center"
+                                HeaderClass="center-wrap" />
+                    <GridColumn Field="Script"
+                                Title="Script"
+                                Width="10%"
+                                Filterable="true"
+                                TextAlign="ColumnTextAlign.Center"
+                                HeaderClass="center-wrap" />
+                    <GridColumn Field="Params"
+                                Title="Parametros"
+                                Width="10%"
+                                Filterable="true"
+                                TextAlign="ColumnTextAlign.Center"
+                                HeaderClass="center-wrap" />
+                    <GridColumn Field="Method"
+                                Title="Metodo"
+                                Width="10%"
+                                Filterable="true"
+                                TextAlign="ColumnTextAlign.Center"
+                                HeaderClass="center-wrap" />
+                    <GridColumn Field="Message"
+                                Title="Mensaje"
+                                Width="10%"
+                                Filterable="true"
+                                TextAlign="ColumnTextAlign.Center"
+                                HeaderClass="center-wrap" />
+                    <GridColumn Field="Detail"
+                                Title="Contenido"
+                                Width="10%"
+                                Filterable="true"
+                                TextAlign="ColumnTextAlign.Center"
+                                HeaderClass="center-wrap" />
+                    <GridColumn Field="MessageError"
+                                Title="Mensaje de error"
+                                Width="10%"
+                                Filterable="true"
+                                TextAlign="ColumnTextAlign.Center"
+                                HeaderClass="center-wrap" />
+                    <GridColumn Field="ErrorType"
+                                Title="Tipo de Error"
+                                Width="10%"
+                                Filterable="true"
+                                TextAlign="ColumnTextAlign.Center"
+                                HeaderClass="center-wrap" />
+                    <GridColumn Field="Exception"
+                                Title="Excepcion"
+                                Width="10%"
+                                Filterable="true"
+                                TextAlign="ColumnTextAlign.Center"
+                                HeaderClass="center-wrap" />
+
+
+                </GridColumns>
+            </TelerikGrid>
+
+
+
+        </div>
+    </div>
+
+
+    <!-- Parte 4: Botones en la izquierda, centro y derecha -->
+    @if (dataChargue)
+    {
+        <PaginationComponent ObjectMeta="@meta" T="VWLogsAuditDtoBugResponse" OnPaginationRefresh="HandlePaginationGrid" Headers="@headers"></PaginationComponent>
+    }
+</div>

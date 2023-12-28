@@ -1,0 +1,57 @@
+﻿@using ControlDoc.Models.Models.Generic
+<div class="my-modal">
+    <TelerikRootComponent>
+
+        <GenericModalComponent Title="Comuniaciones - Radicación de comunicación recibida" IsVisible="modalStatus" OnModalClosed="HandleModalClosed">
+            <ChildContent>
+
+                <EditForm Model="@adminUnitDtoResponse" OnValidSubmit="HandleValidSubmit">
+
+                    <div class="row-md-12">
+                        
+                        @* TODO: Dropdown de version documental *@
+                        <div class="row-md-6 mt-2">
+                        <InputModalComponent IsRequired="true" LabelText="Version documental" Placeholder="Version Documental" FieldType="ValidationType.Name" />
+                        </div>
+                        
+                        @* TODO: Componente de subir documento *@
+                        <div class="row-md-10 mt-3">
+                           
+                        <DragAndDropTemplateComponent OnFileListChanged="HandleFilesList"></DragAndDropTemplateComponent>
+                        </div>
+                        @* TODO: input para el texto de descripcion *@
+                        <div class="row-md-10 mt-3">
+                            <label>Descripción</label>
+                        <textarea class="w-100 custom-textarea"
+                                      id="txtDescripcionImport"
+                                      placeholder=""
+                                  required maxlength="500"></textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="row align-self-center mt-5">
+
+                        <div class="col">
+                            <div class="text-center">
+
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Importar</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                </EditForm>
+
+
+
+                <ModalNotificationsComponent @ref="notificationModal" OnModalClosed="HandleModalNotiClose"></ModalNotificationsComponent>
+
+
+            </ChildContent>
+        </GenericModalComponent>
+    </TelerikRootComponent>
+</div>

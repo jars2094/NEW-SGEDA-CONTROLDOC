@@ -1,0 +1,68 @@
+﻿@implements IAsyncDisposable
+
+<div @ref="dropContainer" class="file-upload-wrapper alig" @ondragenter="OnDragEnter" @ondragover="OnDragEnter" @ondragleave="OnDragLeave">
+
+    <!-- Spinner de carga -->
+    @if (isLoading)
+    {
+        <div class="spinner-container">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+        </div>
+    }
+
+    <!-- Área de carga de archivos, oculta durante la carga -->
+    @if (!isLoading)
+    {
+        @if (fileInfos.Count == 0)
+        {
+            <div class="@hoverClass" style="height:100%;">
+                <div class="central-container">
+                    <img src="../img/carbonDocumentAdd.svg" alt="Upload file" @onclick="TriggerFileInputClick" />
+                    <button class="button-styles-custom" type="button" @onclick="TriggerFileInputClick">Upload file</button>
+                    <span>or</span>
+                    <span>Drag the file here</span>
+                </div>
+            </div>
+        }
+    }
+
+    <!-- Tabla de archivos subidos, oculta durante la carga -->
+    @if (!isLoading && fileInfos.Count > 0)
+    {
+        <div class="table-responsive custom-table-container">
+            <table class="table custom-table">
+                <thead>
+                    <tr>
+                        <th><img src="../img/carbonDocumentAdd.svg" alt="Upload file" @onclick="TriggerFileInputClick" style="cursor:pointer; width: 30px; height: 30px;" /></th>
+                        
+                        <th>Nombre</th>
+                        <th>Detalles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var fileInfo in fileInfos)
+                    {
+                        <tr>
+                            <td>
+                                <img src="../img/deleteIcon.svg" alt="Delete Icon" style="width: 20px; height: 20px; cursor: pointer;" @onclick="() => DeleteFileModalOpen(fileInfo)" />
+                            </td>
+                            <td class="align-items-center" style="word-break: break-word;">
+                                <span>@fileInfo.Name</span>
+                            </td>
+                            <td class="align-items-center">
+                                <i class="@fileInfo.IconPath" style="font-size: 18px;"></i>
+                                <span>@fileInfo.Extension</span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+    <InputFile @ref="inputFile" id="inputFileElement" multiple OnChange="OnChange" style="display: none;" />
+
+</div>
+<ModalNotificationsComponent @ref="notificationModal" OnModalClosed="HandleModalNotiClose"></ModalNotificationsComponent>

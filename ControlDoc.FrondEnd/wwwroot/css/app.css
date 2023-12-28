@@ -1,0 +1,824 @@
+﻿
+/*#region Tabs */
+
+.k-tabstrip-top > .k-tabstrip-items-wrapper .k-item:active, .k-tabstrip-top > .k-tabstrip-items-wrapper .k-item.k-active {
+    margin-bottom: -1px;
+    border-bottom-width: 1px;
+    border-bottom-color: transparent !important;
+    background-color: #41BAEA;
+    border-color: #41BAEA;
+    font-weight: 700;
+    color: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.k-tabstrip-top > .k-tabstrip-items-wrapper .k-item {
+    color: black;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.k-tabstrip-content, .k-tabstrip > .k-content {
+    border-color: transparent;
+}
+
+
+/*#endregion */
+
+
+
+
+.k-dialog-wrapper {
+    z-index: 10001 !important;
+}
+
+/*#region Estilo del footer */
+
+header, footer {
+    flex-shrink: 0;
+}
+
+.footer-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.horizontal-footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+}
+
+.footer-custom {
+    background-color: #EAEAEA;
+    border-top: 5px solid #44B9E8;
+    flex-shrink:0;
+    color: black;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 59px;
+    z-index: 1000;
+}
+
+body.dark .footer-custom {
+    background-color: #2d2d2d !important;
+    color: white;
+}
+
+.text-politicas{
+    color: black ;
+}
+
+body.dark .text-politicas{
+    color: white ;
+}
+
+@media screen and (min-width: 400px) and (max-width: 576px) {
+    .footer-custom {
+        position: relative;
+    }
+}
+
+/*#endregion */
+
+.container-body-bg {
+    height: 100vh;
+    background-color: #eaeaea;
+}
+
+/*#region CSS Colores */
+
+.darkred {
+    color: darkred;
+}
+
+.red {
+    color: red;
+}
+
+/*#endregion */
+
+/*#region CSS medidas estandar para padding y margin (10,20,30)*/
+
+.pt-10 {
+    padding-top: 10px;
+}
+
+.pt-20 {
+    padding-top: 20px;
+}
+
+.pt-30 {
+    padding-top: 30px;
+}
+
+.pt-40 {
+    padding-top: 40px;
+}
+
+.pb-10 {
+    padding-bottom: 10px;
+}
+
+.pb-20 {
+    padding-bottom: 20px;
+}
+
+.pb-30 {
+    padding-bottom: 30px;
+}
+
+.pb-40 {
+    padding-bottom: 40px;
+}
+
+.pl-10 {
+    padding-left: 10px;
+}
+
+.pl-20 {
+    padding-left: 20px;
+}
+
+.pl-30 {
+    padding-left: 30px;
+}
+
+.pr-10 {
+    padding-right: 10px;
+}
+
+.pr-20 {
+    padding-right: 20px;
+}
+
+.pr-30 {
+    padding-right: 30px;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mt-30 {
+    margin-top: 30px;
+}
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.mb-30 {
+    margin-bottom: 30px;
+}
+
+.ml-10 {
+    margin-left: 10px;
+}
+
+.ml-20 {
+    margin-left: 20px;
+}
+
+.ml-30 {
+    margin-left: 30px;
+}
+
+.mr-10 {
+    margin-right: 10px;
+}
+
+.mr-20 {
+    margin-right: 20px;
+}
+
+.mr-30 {
+    margin-right: 30px;
+}
+
+/*#endregion */
+
+/*#region Ocultar/Mostrar Cosas */
+.mostrar-content {
+    display: flex;
+}
+
+.ocultar-content {
+    display: none;
+}
+
+
+/*#endregion */
+
+.navbar {
+    background-color: #E4E4E4;
+    height: 112px;
+}
+
+.custom-dropdown {
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none; /* Remueve el subrayado del enlace */
+}
+
+.custom-dropdown-item {
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+    .custom-dropdown-item:hover {
+        color: #333;
+        background-color: transparent;
+    }
+
+.dropdown-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.dots-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.background-gradient {
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(151.92% 127.02% at 15.32% 21.04%, rgba(152, 152, 152, 0.20) 0%, rgba(204, 88, 84, 0.02) 77.08%, rgba(179, 121, 223, 0.20) 100%);
+    backdrop-filter: blur(40px);
+    position: absolute;
+    right: 0;
+    z-index: -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.responsive-background {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-image: url('../img/rascacielos-angulo-vista1.jpeg');
+    z-index: -1;
+    overflow: hidden;
+}
+
+
+.custom-image-position {
+    position: relative;
+}
+
+    .custom-image-position img {
+        position: absolute;
+        bottom: -5%;
+        right: 0;
+        width: 152px !important;
+        height: 154px !important;
+    }
+
+
+
+.custom-popup-style .swal2-popup {
+    background: url('../img/hoja-controldoc-modal.png') no-repeat bottom right; /* Ajusta la ruta de la imagen seg n corresponda */
+    background-size: auto; /* Ajusta seg n tus preferencias */
+}
+
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+h1:focus {
+    outline: none;
+}
+
+.titulo-azul {
+    color: #2196F3 !important;
+    font-weight:700;
+}
+
+.titulo {
+    border-bottom: 1px solid #e6e6e6;
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    padding-left: 26px;
+}
+
+.noti-1 {
+    margin-bottom: 0px;
+    color: gray;
+    font-size: 11px;
+}
+
+.noti-2 {
+    margin-bottom: 0px;
+    color: gray;
+    font-size: 16px;
+}
+
+a, .btn-link {
+    color: #0071c1;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+    .btn-primary:disabled {
+        background-color: #1b6ec2 !important;
+    }
+
+.content {
+    padding-top: 1.1rem;
+}
+
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+.invalid {
+    outline: 1px solid red;
+}
+
+.validation-message {
+    color: red;
+}
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
+
+.blazor-error-boundary {
+    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYiIGhlaWdodD0iNDkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIG92ZXJmbG93PSJoaWRkZW4iPjxkZWZzPjxjbGlwUGF0aCBpZD0iY2xpcDAiPjxyZWN0IHg9IjIzNSIgeT0iNTEiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0OSIvPjwvY2xpcFBhdGg+PC9kZWZzPjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMCkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0yMzUgLTUxKSI+PHBhdGggZD0iTTI2My41MDYgNTFDMjY0LjcxNyA1MSAyNjUuODEzIDUxLjQ4MzcgMjY2LjYwNiA1Mi4yNjU4TDI2Ny4wNTIgNTIuNzk4NyAyNjcuNTM5IDUzLjYyODMgMjkwLjE4NSA5Mi4xODMxIDI5MC41NDUgOTIuNzk1IDI5MC42NTYgOTIuOTk2QzI5MC44NzcgOTMuNTEzIDI5MSA5NC4wODE1IDI5MSA5NC42NzgyIDI5MSA5Ny4wNjUxIDI4OS4wMzggOTkgMjg2LjYxNyA5OUwyNDAuMzgzIDk5QzIzNy45NjMgOTkgMjM2IDk3LjA2NTEgMjM2IDk0LjY3ODIgMjM2IDk0LjM3OTkgMjM2LjAzMSA5NC4wODg2IDIzNi4wODkgOTMuODA3MkwyMzYuMzM4IDkzLjAxNjIgMjM2Ljg1OCA5Mi4xMzE0IDI1OS40NzMgNTMuNjI5NCAyNTkuOTYxIDUyLjc5ODUgMjYwLjQwNyA1Mi4yNjU4QzI2MS4yIDUxLjQ4MzcgMjYyLjI5NiA1MSAyNjMuNTA2IDUxWk0yNjMuNTg2IDY2LjAxODNDMjYwLjczNyA2Ni4wMTgzIDI1OS4zMTMgNjcuMTI0NSAyNTkuMzEzIDY5LjMzNyAyNTkuMzEzIDY5LjYxMDIgMjU5LjMzMiA2OS44NjA4IDI1OS4zNzEgNzAuMDg4N0wyNjEuNzk1IDg0LjAxNjEgMjY1LjM4IDg0LjAxNjEgMjY3LjgyMSA2OS43NDc1QzI2Ny44NiA2OS43MzA5IDI2Ny44NzkgNjkuNTg3NyAyNjcuODc5IDY5LjMxNzkgMjY3Ljg3OSA2Ny4xMTgyIDI2Ni40NDggNjYuMDE4MyAyNjMuNTg2IDY2LjAxODNaTTI2My41NzYgODYuMDU0N0MyNjEuMDQ5IDg2LjA1NDcgMjU5Ljc4NiA4Ny4zMDA1IDI1OS43ODYgODkuNzkyMSAyNTkuNzg2IDkyLjI4MzcgMjYxLjA0OSA5My41Mjk1IDI2My41NzYgOTMuNTI5NSAyNjYuMTE2IDkzLjUyOTUgMjY3LjM4NyA5Mi4yODM3IDI2Ny4zODcgODkuNzkyMSAyNjcuMzg3IDg3LjMwMDUgMjY2LjExNiA4Ni4wNTQ3IDI2My41NzYgODYuMDU0N1oiIGZpbGw9IiNGRkU1MDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvZz48L3N2Zz4=) no-repeat 1rem/1.8rem, #b32121;
+    padding: 1rem 1rem 1rem 3.7rem;
+    color: white;
+}
+
+    .blazor-error-boundary::after {
+        content: "An error has occurred."
+    }
+
+
+
+/*#region INICIO DONA DEL DASHBOARD*/
+
+.box-shadow-dashboard {
+    box-shadow: 0px 5px 7px -1px #a7a7a7 !important;
+}
+
+body.dark .box-shadow-dashboard {
+    box-shadow: 0px 5px 7px -1px #151515 !important;
+}
+
+.custom-chart {
+    width: 400px;
+    height: 400px;
+    background-color: #f0f0f0;
+}
+
+#custom-chart .rz-chart {
+    width: 100%;
+    height: 100%;
+}
+
+.custom-hover-series-item-0:hover {
+    /* Agrega los estilos de hover deseados */
+    background-color: black;
+    border: 2px solid black;
+    /* Otros estilos personalizados según tus necesidades */
+}
+/*#endregion FIN DONA DASHBOARD*/
+
+.login-prompt {
+    width: 100%;
+    height: 100%;
+    padding: 2px;
+    display: flex; /* Cambio de inline-flex a flex */
+    justify-content: center; /* Cambio de flex-start a center */
+    align-items: flex-start;
+    gap: 10px;
+    padding-top: 3%;
+}
+
+.login-text {
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+.login-link {
+    color: #44B9E8;
+    font-size: 16px;
+    font-weight: 400;
+    word-wrap: break-word;
+    cursor: pointer; /* Esto hará que parezca un enlace, pero debes agregar la lógica de navegación */
+}
+
+.timer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #FFF;
+}
+
+.time {
+    font-weight: bold;
+}
+
+/*#region CSS Telerik Modal */
+
+.k-dialog-titlebar {
+    border-color: inherit;
+    color: black !important;
+    background-color: #f0f0f0 !important;
+    border-radius: 10px 10px 0px 0px !important;
+    border-color: #f0f0f0 !important;
+    padding-left: 23px !important;
+}
+
+.k-window {
+    border-color: rgba(0, 0, 0, 0.08);
+    color: #424242;
+    background-color: #f0f0f0 !important;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.06);
+    border-radius: 10px !important;
+}
+
+.k-window-content, .k-prompt-container {
+    padding: 0px 8px 8px 8px !important;
+}
+
+.k-i-window-maximize::before {
+    content: "" !important;
+    background: url("../img/dimensionar.svg");
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    background-size: cover;
+    border: 0px;
+}
+
+.k-i-window-restore::before {
+    content: "" !important;
+    background: url("../img/dimensionar.svg");
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    background-size: cover;
+    border: 0px;
+}
+
+.k-i-close::before {
+    content: "" !important;
+    background: url("../img/Vector.svg");
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    background-size: cover;
+    border: 0px;
+}
+
+.k-i-close-restore::before {
+    content: "" !important;
+    background: url("../img/Vector.svg");
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    background-size: cover;
+    border: 0px;
+}
+
+.k-button-md.k-icon-button > .k-button-icon {
+    min-width: calc( 16px * 1.4285714286) !important;
+    min-height: calc( 14px * 1.4285714286);
+}
+
+.k-dialog-wrapper {
+    z-index: 10001 !important;
+}
+
+.demo-window {
+    max-width: 100%;
+    margin: 0;
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .demo-window {
+        /*width: 100%;*/
+        padding: 10px;
+    }
+}
+/*media para el tamaño de la modal para las pantallas pequeñas*/
+
+@media only screen and (min-width: 100px) and (max-width: 1100px) {
+    .myWindow {
+        width: 85% !important;
+    }
+    .svg-button{
+        width:15px;
+        height:15px
+    }
+}
+
+/*#endregion */
+
+
+/*#region CSS Telerik DropDownListComponent */
+.k-picker-solid {
+    border-radius: 5px;
+    border: 2px solid var(--Input-general, #7D7D7D);
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.02));
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+/*Texto de los DropDownList*/
+.k-input-value-text {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 4px 8px;
+    color: var(--Input-texto-claro, #CDCDCD);
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+/*#endregion */
+
+/*#region CSS Telerik CalendarDateComponent */
+
+
+.k-input-solid {
+    border-color: #7d7d7d !important;
+}
+
+.k-calendar .k-calendar-cell-inner, .k-calendar .k-link {
+    border-radius: 50% !important;
+}
+
+#customDatePicker.k-animation-container {
+    top: auto !important;
+}
+
+.k-calendar .k-calendar-td.k-selected:focus .k-calendar-cell-inner, .k-calendar .k-calendar-td.k-selected:focus .k-link, .k-calendar .k-calendar-td.k-selected.k-focus .k-calendar-cell-inner, .k-calendar .k-calendar-td.k-selected.k-focus .k-link, .k-calendar .k-calendar-td.k-state-selected.k-state-focus .k-calendar-cell-inner, .k-calendar .k-calendar-td.k-state-selected.k-state-focus .k-link {
+    box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.08) !important;
+    border-radius: 100px;
+    background-color: #41BAEA !important;
+    color: black;
+}
+
+    .k-calendar .k-calendar-td.k-selected.k-focus .k-link:hover {
+        background-color: #40a8d1 !important;
+        color: black;
+    }
+
+.k-calendar .k-calendar-td.k-selected .k-link {
+    background-color: #40a8d1 !important;
+    color: black !important;
+}
+
+    .k-calendar .k-calendar-td.k-selected .k-link:hover {
+        background-color: #40a8d1 !important;
+        color: black !important;
+    }
+
+/*#endregion */
+
+/*#region CSS Telerik DropDownList */
+
+.k-input, .k-picker {
+    height: 37.6px !important;
+}
+
+.k-list-filter {
+    padding: 13px !important;
+}
+
+.k-input-solid:focus-within {
+    border-color: rgba(0, 0, 0, 0.8) !important;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0) !important;
+    border-radius: 9px !important;
+}
+
+.k-input:not(:-webkit-autofill) {
+    position: relative !important;
+    left: 0px !important;
+    top: 0px !important;
+}
+
+.k-list-md .k-list-item, .k-list-md .k-list-optionlabel {
+    height: 44px !important;
+}
+
+.k-picker-solid {
+    border-color: #959595 !important;
+    color: #212529 !important;
+    background-color: white !important;
+}
+
+.k-popup > .k-list {
+    padding: 0px 5px !important;
+}
+
+.k-input-value-text {
+    color: black !important;
+}
+
+.k-list-item.k-selected, .k-selected.k-list-optionlabel {
+    color: #000000 !important;
+    background-color: #e9e9e9 !important;
+}
+
+.k-list-item:focus, .k-list-optionlabel:focus, .k-list-item.k-focus, .k-focus.k-list-optionlabel {
+    box-shadow: inset 0 0 0 3px rgba(33, 37, 41, 0) !important;
+}
+
+/*#endregion */
+
+/*#region CSS número item */
+
+.numero {
+    width: 60px;
+    height: 60px;
+    background-color: #7CDAFF;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .numero h2 {
+        margin: 0px;
+        font-family: Roboto;
+        font-weight: 600;
+    }
+
+/*#endregion */
+
+/*#region CSS Botones */
+
+.btn-style {
+    height: 38px;
+    width: 100%;
+    font-size: 16px;
+    padding-top: 6px;
+}
+
+/*#endregion */
+
+/*#region Grilla Telerik Administracion */
+
+.k-grid th.center-wrap {
+    justify-content: center;
+    text-align: center;
+    white-space: normal;
+    vertical-align: middle;
+    overflow: hidden; /* Evita que el texto desborde la columna */
+}
+
+    .k-grid th.center-wrap .k-column-title {
+        white-space: nowrap; /* Evita que el título se divida en varias líneas */
+    }
+
+div.k-grid-header, div.k-grid-footer {
+    background-color: #F5F5F5;
+}
+
+.k-table-td .k-button-solid-base {
+    border: none !important;
+    color: #41BAEA !important;
+    background: none !important;
+}
+
+.k-grid td {
+    border-bottom-width: 1px;
+    border-color: black;
+    vertical-align: middle;
+    border-right-width: 0;
+    border-left-width: 0;
+}
+
+.k-grid-header, .k-header, th.k-header, .k-grid-header-wrap, .k-grouping-header, .k-grouping-header .k-group-indicator, .k-grid td, .k-grid-footer, .k-grid-footer-wrap, .k-grid-content-locked, .k-grid-footer-locked, .k-grid-header-locked, .k-filter-row > td, .k-filter-row > th {
+    font-family: 'Poppins', sans-serif;
+    border-color: black;
+    border-right-width: 0;
+    border-left-width: 0;
+}
+
+.k-grid {
+    border: 0px !important;
+}
+
+    .k-grid .k-grid-aria-root {
+        border-radius: 30px 30px 0px 0px;
+    }
+
+    .k-grid .k-grid-header .k-table {
+        height: 66px !important;
+    }
+
+    .k-grid .k-grid-header .k-table-th {
+        vertical-align: revert !important;
+        text-align: center !important;
+        font-weight: 600;
+    }
+
+    .k-grid .k-cell-inner {
+        position: relative;
+        top: 0px;
+    }
+
+    .k-grid .k-table-row {
+        height: 62px !important;
+    }
+
+    .k-grid .k-table-th, .k-grid td, .k-grid .k-table-td {
+        border-color: transparent !important;
+    }
+
+        .k-grid .k-table-th:first-child, .k-grid td:first-child, .k-grid .k-table-td:first-child {
+            display: flex;
+            justify-content: center;
+            top: 14px;
+            position: relative;
+        }
+
+/*#endregion */
+
+/*#region CSS del TextArea */
+
+.custom-textarea {
+    border-radius: 5px;
+    padding: 10px;
+    height: 87px;
+}
+
+textarea:required:invalid {
+    border-color: red !important;
+}
+
+textarea:focus {
+    border-color: #41BAEA !important;
+}
+
+/*#endregion*/
+
+body.dark .card{
+    background-color: #3e3e3e;
+}
+
+body.dark label{
+    color:white;
+}
+
+body.dark label b{
+    color:white;
+}
+
+body.dark h5{
+    color:white;
+}

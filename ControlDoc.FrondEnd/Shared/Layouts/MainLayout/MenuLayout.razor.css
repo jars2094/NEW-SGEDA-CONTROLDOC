@@ -1,0 +1,655 @@
+﻿
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/roboto-light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/poppins-regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Nunito';
+    src: url('fonts/nunito-regular.ttf') format('truetype');
+}
+
+/* Estilo del header */
+.navbar {
+    background-color: #DADADA !important;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+@media screen and (min-width: 400px) and (max-width: 576px) {
+    .navbar {
+        position: relative;
+    }
+    .navbar2 {
+        position: relative;
+    }
+}
+
+/* Estilo del contenedor general */
+
+.main-container-body {
+    flex: 1;
+    background: #F0F2F5;
+    border-radius: 18px;
+    margin-right: 56px;
+    margin-left: 2% !important;
+    margin-bottom: 0px;
+    background-color: white;
+    width:1px;
+}
+
+/* Estilo del texto del header */
+.text-header {
+    font-family: Poppins;
+}
+
+/* Estilo del texto del cuerpo de la pagina (main) osea el contenido */
+.text-body {
+    font-family: Nunito;
+    /*margin-top: 107px;*/
+    margin-bottom: 56px;
+}
+
+@media screen and (min-width: 400px) and (max-width: 576px) {
+    .text-body {
+        margin: 0px;
+    }
+}
+
+/* Estilo del texto del footer */
+.text-footer {
+    font-family: Roboto;
+}
+
+/* Estilo del fondo de la row general, fila que tiene las 3 columnas (menu de accesos rapidos, menu desplegable y el hijo) */
+.row-general {
+    background-color: #EAEAEA;
+}
+
+/* Estilo del contenedor Nav del NavMenu */
+.sidebar {
+    background-color: #EAEAEA !important;
+    width: 110px;
+}
+
+/* Estilo para el boton de menu del submenu en estado hover */
+.btn:hover .submenu {
+    background-color: none;
+    border-color: none;
+}
+
+/* Estilo de la linea inferior del encabezado (header) */
+.Border-Nav {
+    border-bottom: 3px solid transparent;
+    border-color: #41BAEA;
+    border-image-slice: 1;
+}
+
+/* Estilo para ocultar el menu desplegable */
+.hidden {
+    display: none;
+}
+
+/* Estilos de ancho maximo para contenedores */
+.container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    max-width: 1850px;
+}
+
+/* Estilos de ancho maximo para pantallas grandes (1200px+) */
+@media (min-width: 1200px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: 100%;
+    }
+}
+
+/* Estilos de ancho maximo para pantallas medianas (992px-1199px) */
+@media (max-width: 992px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+        max-width: 100%;
+    }
+}
+
+/* Estilos de ancho maximo para pantallas pequeñas (768px-991px) */
+@media (max-width: 768px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+        max-width: 100%;
+    }
+}
+
+/* Estilos de margen izquierdo para pantallas md (576px-759px) */
+@media (min-width: 576px) {
+    .main-container-body {
+        margin-left: 8%;
+    }
+}
+
+/* Estilos de margen izquierdo para pantallas md (760px-859px) */
+@media (min-width: 760px) {
+    .main-container-body {
+        margin-left: 3%;
+    }
+    /* Estilo para main-container-body cuando el submenu está activo */
+    .show-submenu1 {
+        flex: 1;
+        transition: flex 0.3s ease;
+        overflow-x: hidden;
+        margin-left: 28% !important;
+        transition: margin-left 0.3s ease;
+    }
+}
+
+/* Estilos de margen izquierdo para pantallas md (860px-979px) */
+@media (min-width: 860px) {
+    .main-container-body {
+        margin-left: 7%;
+    }
+}
+
+/* Estilos de margen izquierdo para pantallas md (980px-991px) */
+@media (min-width: 980px) {
+    .main-container-body {
+        margin-left: 7%;
+    }
+}
+
+/* Estilos de margen izquierdo para pantallas lg (992px-1449px) */
+@media (min-width: 992px) {
+    .main-container-body {
+        margin-left: 7%;
+    }
+    /* Estilo para main-container-body cuando el submenu está activo */
+    .show-submenu1 {
+        flex: 1;
+        transition: flex 0.3s ease;
+        overflow-x: hidden;
+        margin-left: 28% !important;
+        transition: margin-left 0.3s ease;
+    }
+}
+
+/* Estilos de margen izquierdo para pantallas xl (1450px-1819px) */
+@media (min-width: 1450px) {
+    .main-container-body {
+        margin-left: 2%;
+    }
+    /* Estilo para main-container-body cuando el submenu está activo */
+    .show-submenu1 {
+        flex: 1;
+        transition: flex 0.3s ease;
+        overflow-x: hidden;
+        margin-left: 21% !important;
+        transition: margin-left 0.3s ease;
+    }
+}
+
+/* Estilos de margen izquierdo para pantallas xxl (1820px+) */
+@media (min-width: 1820px) {
+    .main-container-body {
+        margin-left: 0%;
+    }
+    /* Estilo para main-container-body cuando el submenu está activo */
+    .show-submenu1 {
+        flex: 1;
+        transition: flex 0.3s ease;
+        overflow-x: hidden;
+        margin-left: 19% !important;
+        transition: margin-left 0.3s ease;
+    }
+}
+
+/* Estilo para el menu de accesos de rapidos (navmenu) */
+.navmenu {
+    position: fixed;
+    top: 120px; /*ahora mismo esta del tamaño del header, pero antes era 13%;*/
+    bottom: 59px; /*ahora mismo esta del tamaño del footer, pero antes era 12%;*/
+    z-index: 100;
+    overflow-y: scroll;
+    max-height: calc(100vh - 107px);
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+    /* Asegura que el NavMenu tenga una altura maxima para ajustarse a la pantalla */
+    .navmenu .position-sticky {
+        max-height: calc(100vh - 107px);
+        overflow-y: auto;
+    }
+
+
+/*aqui debera colocarse los estilos del responsive mobiles que ahora mismo esta en proceso*/
+@media screen and (min-width: 400px) and (max-width: 576px) {
+
+    .navmenu {
+        /*aqui debera colocarse unos estilos para que el icono que abre el submenu quede en la parte superior*/
+    }
+}
+
+
+/* Animación de entrada y salida para el submenu */
+
+.style-submenu {
+    margin-left: calc(-2% - 12px);
+    margin-top: -42px;
+    background: white;
+    border-top-right-radius: 20px !important;
+    border-bottom-right-radius: 20px !important;
+    -webkit-box-shadow: 10px 10px 22px -12px rgba(0,0,0,0.75);
+}
+
+.submenu {
+    position: absolute;
+    z-index: 1;
+    transform: translateX(-200%);
+    visibility: hidden;
+    transition: transform 0.9s ease-out, visibility 0.5s ease-out;
+}
+
+.show-submenu {
+    /*transform: translateX(0);*/
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform 0.9s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+
+
+
+/* Estilo Submenu para pantallas medianas */
+@media (min-width: 768px) {
+    .submenu {
+        max-height: 100%;
+    }
+}
+
+/* Estilo Submenu para pantallas pequeñas */
+@media (max-width: 767px) {
+    .submenu {
+        max-height: 90%;
+    }
+}
+
+/* Estilo para ocultar la barra de desplazamiento en navegadores webkit */
+.navmenu::-webkit-scrollbar {
+    display: none;
+}
+
+/* Margen superior de 132px */
+.mt-132{
+    margin-top:132px !important;
+}
+.mt-nav{
+    margin-top:112px !important;
+    z-index:1;
+}
+
+.mb-76 {
+    margin-bottom: 76px !important;
+}
+
+.nav-text {
+    margin-top: 5px;
+}
+/*#region Estilo del Navbar Vertical */
+
+body {
+    display: flex;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial;
+    font-size: 16px;
+    gap: 30px;
+    background-color: #eaeaea;
+}
+
+    body.dark {
+        background-color: black !important;
+    }
+
+header {
+    width: 130px;
+    background-color: #F8F9FA;
+    margin-top: 110px;
+}
+
+body.dark header {
+    background-color: #2d2d2d;
+}
+
+nav#NavHorizontal {
+    background-color: #FFFFFF !important;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+body.dark nav#NavHorizontal {
+    background-color: #2d2d2d !important;
+    color: white;
+}
+
+nav#NavHorizontal div a img.navbar-logo {
+    padding-right: 12px;
+}
+
+div#contenerdor-nav {
+    position: relative;
+}
+
+    div#contenerdor-nav div#SubMenu {
+        position: absolute;
+        background-color: white;
+        top: 8px;
+        left: 100%;
+        right: 0;
+        margin: 0 auto;
+        width: 400px;
+        z-index: 20;
+    }
+
+nav#NavVertical {
+    position: relative;
+    z-index:30;
+}
+
+    nav#NavVertical ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        line-height: 16px;
+    }
+
+    nav#NavVertical ul a {
+        box-sizing: border-box;
+        color: white;
+        background-color: transparent;
+        display: block;
+        width: 100%;
+        padding: 6px 10px;
+        text-decoration: none;
+    }
+
+        nav#NavVertical ul li a span {
+            margin-top: 8px;
+        }
+
+        nav#NavVertical ul li a {
+            cursor: pointer;
+            background-color: #F8F9FA;
+        }
+
+body.dark nav#NavVertical ul li a {
+    background-color: #2d2d2d;
+}
+
+nav#NavVertical ul li a.nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    color: #282828;
+}
+
+body.dark nav#NavVertical ul li a.nav-link {
+    color: white;
+}
+
+        nav#NavVertical ul li a.nav-link:hover {
+            color: #5ec4ec;
+        }
+
+body.dark nav#NavVertical ul li a.nav-link:hover {
+    color: #5ec4ec;
+}
+
+.padding-main {
+    padding: 25px 25px 25px 0px;
+    width: 91%;
+    margin-top: 110px;
+}
+
+.container-main-body {
+    background: #F0F2F5;
+    border-radius: 18px;
+    background-color: white;
+    margin-bottom: 59px;
+    padding: 25px;
+}
+body.dark #menulayaout {
+    background: #4f4f4f;
+}
+
+body.dark .container-main-body {
+    background-color: #2d2d2d;
+}
+
+/*#endregion */
+
+/*Estilo de contenedor principal de los menus*/
+.main-container-menu {
+    border-top-right-radius: 18px !important;
+    border-bottom-right-radius: 18px !important;
+}
+
+/*Estilo de todos subniveles*/
+.levels {
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+/*Estilo de todos los nombres de menu y subniveles*/
+.span {
+    font-size: 15px;
+}
+
+
+/* Estilo para el boton del menu*/
+.menu-option {
+    color: #697A8D;
+    min-height: 47px;
+}
+
+
+
+    /* Estilo para el boton del menu cuando este seleccionado*/
+    .menu-option.main-button {
+        background-color: #f4f5f7; /* Color azul por defecto */
+        position: relative;
+        padding-left: 12px;
+        color: #41BAEA; /* Mantener el color de texto original */
+        /*border-left: 7px solid #41BAEA;*/ /* Borde izquierdo azul por defecto */
+    }
+
+        /* Estilos para la linea azul que indica un nav-link (icono) activo*/
+        .menu-option.main-button::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px; /* Ancho de la línea azul */
+            background: #41BAEA; /* Color azul */
+            border-top-right-radius: 10px; /* Esquina derecha superior redondeada */
+            border-bottom-right-radius: 10px; /* Esquina derecha inferior redondeada */
+        }
+
+
+/* Estilo para el icono de flecha en el botón principal seleccionado */
+.main-button.btn-selected .bi {
+    color: #8592A3; /* Color blanco */
+}
+
+/* Estilos para todas las opciones/subniveles */
+.sub-option {
+    color: #697A8D;
+}
+
+    /* Cambiar el color del texto solo cuando una subopción está seleccionada */
+    .sub-option.btn-selected .text-color-sub {
+        font-weight: bold; /* Hacer que el texto se vuelva en negrita (bold) cuando está seleccionado */
+        /*color: #697A8D;*/
+    }
+
+    /* Aplicar el color original del texto cuando no está seleccionado */
+    .sub-option:not(.btn-selected) .text-color-sub {
+        font-weight: normal; /* Hacer que el texto vuelva a la fuente normal cuando no está seleccionado */
+    }
+
+    /* Evitar que se aplique ningún otro estilo a las subopciones seleccionadas */
+    .sub-option .btn-selected {
+        background-color: transparent; /* Fondo transparente */
+        border: none; /* Sin borde */
+    }
+
+        .sub-option .btn-selected .bi {
+            display: none; /* Ocultar el ícono de flecha */
+        }
+
+
+/* Estilo de enfoque personalizado para los botones */
+.btn:focus {
+    outline: none; /* Elimina el borde azul predeterminado */
+    box-shadow: none;
+}
+
+
+.icon-menu {
+    width: 25px;
+    margin-right: 6px;
+}
+
+
+.btn-selected-with-options {
+    border-bottom: 2px #41BAEA solid !important;
+    background-color: transparent;
+    border: none;
+    border-radius: 0 0 5px 5px;
+    color: #41BAEA;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-without-options:hover {
+    background-image: url('../img/menu/iconPointSelected.svg');
+    background-position: left center;
+    background-repeat: no-repeat;
+    padding-left: 12px;
+    color: #41BAEA;
+    position: relative;
+}
+
+.btn-without-options {
+    background-image: url('../img/menu/iconPoint.svg');
+    background-position: left center;
+    background-repeat: no-repeat;
+    padding-left: 12px;
+    color: #697A8D;
+    position: relative;
+}
+
+.btn-selected.btn-without-options {
+    background-image: url('../img/menu/iconPointSelected.svg');
+    background-position: left center;
+    background-repeat: no-repeat;
+    padding-left: 12px;
+    color: #41BAEA;
+    position: relative;
+}
+
+
+.pl-2 {
+    margin-left: 10px;
+}
+
+.pl-3 {
+    margin-left: 10px;
+}
+
+.pl-4 {
+    margin-left: 10px;
+}
+
+/*#region Switch DarkMode */
+
+.switch-darkmode {
+    background-color: #343D5B !important;
+    border-radius: 100px;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    outline: none;
+    border: 3px solid #eaeaea;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+    .switch-darkmode::after {
+        content: "";
+        display: block;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        background-color: #F1F1F1;
+        top: -10%;
+        right: unset;
+        left: -2%;
+        border-radius: 100px;
+        transition: .3s ease all;
+        box-shadow: 0px 0px 2px 2px rgba(0,0,0,.2);
+    }
+
+    .switch-darkmode.active {
+        background-color: orange !important;   
+        color: #000;
+    }
+
+        .switch-darkmode.active::after {
+            left: unset;
+            right: -2%;
+        }
+
+    .switch-darkmode span {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        display: block;
+        background-color: none;
+        color: #FFF;
+    }
+
+
+/*#endregion */
+li {
+    position: relative;
+}
+
+.image-container {
+    position: absolute;
+    top: 0;
+    left: 100%;
+      
+}
+
+    .image-container .row {
+        display: flex;
+        justify-content: flex-start; 
+        gap: 0.5rem;
+    }
+
+    .image-container .col {
+        flex: 0 0 33.333%; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    

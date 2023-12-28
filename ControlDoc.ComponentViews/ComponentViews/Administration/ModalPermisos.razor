@@ -1,0 +1,193 @@
+﻿@using ControlDoc.Components.Components.Switch
+@using ControlDoc.Models.Models.Administration.Response
+<div class="my-modal" id=@IdModalIdentifier style="width=35%:">
+    <TelerikRootComponent>
+
+        <GenericModalComponent Title="Administración - Permisos" IsVisible="ModalStatusPermisos" Id="@IdModalIdentifier" OnModalClosed="HandleModalClosed" >
+            <ChildContent>
+               
+                <div class="row">
+                    <!-- Parte Izquierda: Input y Label -->
+                    <div class="col align-self-center">
+                        <div class="input-container">
+                            <label for="input1">Funcionalidades</label>
+                        </div>
+
+                       @*  <DropDownListTelerik @ref="@SelectDropdown"
+                                             T="FuncionalityDtoResponse"
+                                             Data="@FuncionalidadList"
+                                             SelectedValueint="@FunctionalityId"
+                                             TextField="functionality1"
+                                             ValueField="functionalityId"
+                                             ValueType="int"
+                                             Filterable="true"
+                                             DefaultText="Seleccione una opción.."
+                                             OnValueEntered="GetFuncionalidades"
+                                             Enabled="@CrearEditar">
+                        </DropDownListTelerik> *@
+                        @* <TelerikDropDownList @ref="@SelectDropdown" 
+                                             Data="@FuncionalidadList"
+                                             ValueField="functionalityId"
+                                             Value="@FunctionalityId"
+                                             Enabled="@CrearEditar"
+                                             TextField="functionality1"
+                                            
+                                             ValueChanged="@( (int newValue) => GetFuncionalidades(newValue) )">
+                        </TelerikDropDownList> *@
+
+                        <TelerikDropDownList @ref="@SelectDropdown"
+                                             Data="@FuncionalidadList"
+                                             @bind-Value="@FunctionalityId"
+                                             Id="GR_Pais"
+                                             TextField="functionality1"
+                                             ValueField="functionalityId"
+                                             DefaultText="@DefaultTextGrid"
+                                             Enabled="habilitarFuncionalidad"
+                                             OnChange="GetFuncionalidades"
+                                             Filterable="true"
+                                             FilterOperator="StringFilterOperator.Contains"
+                                             >
+                        </TelerikDropDownList>
+                    </div>
+
+
+                </div>
+                <br />
+                <div class="row ">
+                    @* <div class="center-block ">
+                        <ul>
+                            <li class="col-6">
+                                Con acceso
+                                <TelerikSwitch Class="col-6 float-right"
+                                               @bind-Value="@SelectAccessF"
+                                               OnLabel=""
+                                               OffLabel=""></TelerikSwitch>
+                            </li>
+                            <li>
+                                Guardar
+                                <TelerikSwitch Class="float-right"
+                                               @bind-Value="@SelectCreateF"
+                                               OnLabel=""
+                                               OffLabel=""></TelerikSwitch>
+                            </li>
+                            <li>
+                                Modificación de registro
+                                <TelerikSwitch Class="float-right"
+                                               @bind-Value="@SelectModifyF"
+                                               OnLabel=""
+                                               OffLabel=""></TelerikSwitch>
+                            </li>
+                            <li>
+                                Consultar
+                                <TelerikSwitch Class="float-right"
+                                               @bind-Value="@SelectConsultF"
+                                               OnLabel=""
+                                               OffLabel=""></TelerikSwitch>
+                            </li> 
+                            <li>
+                                Eliminar
+                                <TelerikSwitch Class="float-right"
+                                               @bind-Value="@SelectDeleteF"
+                                               OnLabel=""
+                                               OffLabel=""></TelerikSwitch>
+                            </li> 
+                            <li>
+                                Imprimir
+                                <TelerikSwitch Class="float-right"
+                                               @bind-Value="@SelectPrintF"
+                                               OnLabel=""
+                                               OffLabel=""></TelerikSwitch>
+                            </li><li>
+                                Activo
+                                <TelerikSwitch Class="float-right"
+                                               @bind-Value="@SelectActivoState"
+                                               OnLabel=""
+                                               OffLabel=""></TelerikSwitch>
+                            </li>
+                           
+
+                        </ul>
+                    </div> *@
+
+                    <div class="d-flex flex-column  ">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Con acceso</label>
+                            </div>
+                            <div class="col-md-2">
+                                <TelerikSwitch @bind-Value="@SelectAccessF" OnLabel="" OffLabel="" Class="mt-2"></TelerikSwitch>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Guardar</label>
+                            </div>
+                            <div class="col-md-2">
+                                <TelerikSwitch @bind-Value="@SelectCreateF" OnLabel="" OffLabel="" Class="mt-2"></TelerikSwitch>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Modificación de registro</label>
+                            </div>
+                            <div class="col-md-2">
+                                <TelerikSwitch @bind-Value="@SelectModifyF" OnLabel="" OffLabel="" Class="mt-2"></TelerikSwitch>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Consultar</label>
+                            </div>
+                            <div class="col-md-2">
+                                <TelerikSwitch @bind-Value="@SelectConsultF" OnLabel="" OffLabel="" Class="mt-2"></TelerikSwitch>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Eliminar</label>
+                            </div>
+                            <div class="col-md-2">
+                                <TelerikSwitch @bind-Value="@SelectDeleteF" OnLabel="" OffLabel="" Class="mt-2"></TelerikSwitch>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Imprimir</label>
+                            </div>
+                            <div class="col-md-2">
+                                <TelerikSwitch @bind-Value="@SelectPrintF" OnLabel="" OffLabel="" Class="mt-2"></TelerikSwitch>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Activo</label>
+                            </div>
+                            <div class="col-md-2">
+                                <TelerikSwitch @bind-Value="@SelectActivoState" OnLabel="" OffLabel="" Class="mt-2"></TelerikSwitch>
+                            </div>
+                        </div>
+
+                      
+                    </div>
+
+                    <br />
+                    <div class="row align-self-center mt-5">
+                        <!-- Parte Derecha: Dos Botones -->
+                        <div class="col">
+                            <div class="text-center">
+@*                                 <button class="botones limpiar" type="submit" onClick="@Limpiar">Limpiar</button>
+ *@                                <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="@Guardar" value="@btnSaveOEdit">@btnSaveOEdit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+                <ModalNotificationsComponent @ref="notificationModal" OnModalClosed="HandleModalNotiClose"></ModalNotificationsComponent>
+
+            </ChildContent>
+        </GenericModalComponent>
+    </TelerikRootComponent>
+    <ModalComponent @ref="Modal"></ModalComponent>
+
+</div>

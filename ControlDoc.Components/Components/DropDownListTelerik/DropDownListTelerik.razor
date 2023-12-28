@@ -1,0 +1,91 @@
+﻿@typeparam T
+
+@if (ValueType.Equals("int"))
+{
+    <div style="display: flex; flex-direction: column;">
+        <label for="input2" style="margin-bottom:6px;">@LabelDDL</label>
+
+        <TelerikDropDownList @bind-Value="SelectedValueint"
+                             Id="@Id"
+                             Data="@Data"
+                             TextField="@TextField"
+                             ValueField="@ValueField"
+                             DefaultText="@DefaultText"
+                             Filterable="@Filterable"
+                             FilterOperator="StringFilterOperator.Contains"
+                             FilterDebounceDelay="200"
+                             OnChange="@EnviarId"
+                             Enabled="@Enabled">
+        </TelerikDropDownList>
+    </div>
+}
+else if (ValueType.Equals("string"))
+{
+
+    <div style="display: flex; flex-direction: column;">
+        <label for="input2" style="margin-bottom:6px;">@LabelDDL</label>
+        <TelerikDropDownList @bind-Value="SelectedValuestring"
+                             Id="@Id"
+                             Data="@Data"
+                             TextField="@TextField"
+                             ValueField="@ValueField"
+                             DefaultText="@DefaultText"
+                             Filterable="@Filterable"
+                             FilterOperator="StringFilterOperator.Contains"
+                             FilterDebounceDelay="200"
+                             OnChange="@EnviarString"
+                             Enabled="@Enabled">
+        </TelerikDropDownList>
+    </div>
+}
+
+<style>
+
+    .k-input, .k-picker {
+        height: 37.6px !important;
+    }
+
+    .k-list-filter {
+        padding: 13px !important;
+    }
+
+    .k-input-solid:focus-within {
+        border-color: rgba(0, 0, 0, 0.8) !important;
+        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0) !important;
+        border-radius: 9px !important;
+    }
+
+    .k-input:not(:-webkit-autofill) {
+        position: relative !important;
+        left: 0px !important;
+        top: 0px !important;
+    }
+
+    .k-list-md .k-list-item, .k-list-md .k-list-optionlabel {
+        height: 44px !important;
+    }
+
+    .k-picker-solid {
+        border-color: #959595 !important;
+        color: #212529 !important;
+        background-color: white !important;
+    }
+
+    .k-popup > .k-list {
+        padding: 0px 5px !important;
+    }
+
+    .k-input-value-text {
+        color: black !important;
+    }
+
+    .k-list-item.k-selected, .k-selected.k-list-optionlabel {
+        color: #000000 !important;
+        background-color: #e9e9e9 !important;
+    }
+
+    .k-list-item:focus, .k-list-optionlabel:focus, .k-list-item.k-focus, .k-focus.k-list-optionlabel {
+        box-shadow: inset 0 0 0 3px rgba(33, 37, 41, 0) !important;
+    }
+
+</style>

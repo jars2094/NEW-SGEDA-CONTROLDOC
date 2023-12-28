@@ -1,0 +1,42 @@
+﻿@* @page "/Register"
+@layout LoginLayout
+@using ControlDoc.Control.Services.Features.Interfaces;
+
+@inject IJSRuntime js
+@inject SweetAlertService swal
+@inject IServicios servicios
+@inject HttpClient httpclient
+@inject NavigationManager navigation
+@inject EventAggregatorService EventAggregator *@
+
+<PageTitle>Register</PageTitle>
+<EditForm Model="@formModel" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ModalComponent @ref="modal"></ModalComponent>
+
+    <div class="row">
+        <div class="col-12 form-group mb-4">
+            <LabelComponent KeyName=@setKeyName("LabelTextUsuario") For="name-field" AdditionalClasses="mb-2" />
+            <InputComponent @ref="nameInput" InputType=InputTypeEnum.text Placeholder="@setKeyName("PlaceHolderUsuario")" ErrorMessage="El nombre es requerido." ShowErrors="@formSubmitted" />
+        </div>
+        <div class="col-12 form-group mb-4">
+            <LabelComponent KeyName=@setKeyName("LabelTextCorreo") For="email-field" AdditionalClasses="mb-2" />
+            <InputComponent @ref="emailInput" InputType=InputTypeEnum.email Placeholder="@setKeyName("PlacerHolderCorreo")" ErrorMessage="El correo electrónico es requerido." ShowErrors="@formSubmitted" />
+        </div>
+        <div class="col-12 form-group mb-4">
+            <LabelComponent KeyName=@setKeyName("LabelTextCrearContraseña") For="password-field" AdditionalClasses="mb-2" />
+            <InputComponent @ref="passwordInput" InputType=InputTypeEnum.password Placeholder="@setKeyName("PlacerHolderIntroducirContraseña")" ErrorMessage="La contraseña es requerida." ShowErrors="@formSubmitted" />
+        </div>
+    </div>
+    <div class="row button-container">
+        <div class="col-12 text-center mt-2">
+            <button class="btn btn-primary btn-lg w-50" type="submit">@setKeyName("ButtonCrearUsuario")</button>
+        </div>
+    </div>
+    <div class="row login-prompt">
+        <div class="col-12 text-center">
+            <span class="login-text">@setKeyName("SpanYaTienesCuenta")</span>
+            <a href="PasswordRecovery" class="login-link">@setKeyName("SpanIngresa")</a>
+        </div>
+    </div>
+</EditForm>

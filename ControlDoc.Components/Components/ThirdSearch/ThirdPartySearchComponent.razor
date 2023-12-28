@@ -1,0 +1,422 @@
+﻿@using ControlDoc.Components.Components.Input;
+@using ControlDoc.Models.Models.Administration.Response;
+
+<div class="my-modal">
+    <div class="row py-4">
+
+        <div class="col-md-3 switchStyle">
+
+
+
+
+            <div class="row mb-5 mt-3">
+
+                <label> <TelerikSwitch Value="@searchByPJ" ValueChanged="( (bool newValue) => OnChangeSwitchPN() )" /> Persona Juridica</label>
+
+
+            </div>
+
+
+
+            <div class="row">
+
+                <label><TelerikSwitch Value="@searchByPN" ValueChanged="( (bool newValue) => OnChangeSwitchPJ() )" /> Persona Natural</label>
+
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+
+
+        <div class="col-md-3">
+
+            <div class="row">
+                <InputModalComponent @ref="inputNames" IsRequired="false" LabelText=@(searchByPJ ? "Razon Social" : "Nombre y/o Apellido") Placeholder="" />
+            </div>
+
+
+            <div class="row">
+
+                <InputModalComponent @ref="inputEmail" IsRequired="false" LabelText="Correo Electrónico" Placeholder="" />
+            </div>
+
+        </div>
+
+
+        <div class="col-md-3">
+            <div class="row">
+                <InputModalComponent @ref="inputIdentificcation" IsRequired="false" LabelText=@(searchByPJ ? "RUT" : "CC") Placeholder="" />
+            </div>
+
+
+        </div>
+
+
+
+        <div class="col-md-3">
+
+
+
+            <button class="botones buscar btn btn-primary btn-lg btn-block btn-style " @onclick="OnClickButton" disabled="@disableButton" type="button">Buscar</button>
+
+
+        </div>
+
+
+    </div>
+    <div class="row">
+        <TelerikGrid Data="@thirdPartyList" PageSize="@(meta.pageSize)"
+                     Sortable="true"
+                     Resizable="false"
+                     ScrollMode="@GridScrollMode.Scrollable"
+                     Height="480px"
+                     RowHeight="60"
+                     Reorderable="true">
+            
+            <GridColumns>
+
+                <GridColumn Width="150px">
+                    <HeaderTemplate>
+
+                        <label> Seleccionar  </label>
+                    </HeaderTemplate>
+                    <Template>
+
+
+                        @{
+
+
+
+                            var thirdPartySelected = context as ThirdPartyDtoResponse;
+
+                            <TelerikCheckBox Enabled=thirdPartySelected.EnableSelection @bind-Value="@thirdPartySelected!.Selected" OnChange="@(() => changeStateThirdParty(thirdPartySelected))">
+                            </TelerikCheckBox>
+
+                        }
+
+
+                    </Template>
+
+                </GridColumn>
+
+
+                <GridColumn Visible=@(multipleSelection && showCopiesColumn) Width="150px">
+                    <HeaderTemplate>
+
+                        <label> Copias  </label>
+                    </HeaderTemplate>
+                    <Template>
+
+
+                        @{
+
+
+
+                            var thirdPartySelected = context as ThirdPartyDtoResponse;
+
+                            <TelerikCheckBox Enabled=thirdPartySelected.EnableCopy @bind-Value="@thirdPartySelected!.Copy" OnChange="@(() => ChangeStateThirdPartyCopies(thirdPartySelected))">
+
+                            </TelerikCheckBox>
+
+                        }
+
+
+                    </Template>
+
+                </GridColumn>
+
+                <GridColumn Width="150px">
+                    <HeaderTemplate>
+
+                        <label> Identificacion  </label>
+                    </HeaderTemplate>
+                    <Template>
+
+
+                        @{
+
+
+
+                            var thirdPartySelected = context as ThirdPartyDtoResponse;
+                            <div class="col">
+                                <div class="row">
+                                    <label> @thirdPartySelected?.IdentificationNumber</label>
+                                </div>
+                            </div>
+
+                        }
+
+
+                    </Template>
+
+                </GridColumn>
+
+                <GridColumn Width="150px">
+                    <HeaderTemplate>
+
+                        <label> @(searchByPJ ? "Razon Social" : "Nombre/Apellido")   </label>
+                    </HeaderTemplate>
+                    <Template>
+
+                        @{
+
+
+                            var thirdPartySelected = context as ThirdPartyDtoResponse;
+                            <div class="col">
+                                <div class="row">
+                                    <label> @thirdPartySelected?.Names</label>
+                                </div>
+                            </div>
+
+
+                        }
+
+                    </Template>
+
+                </GridColumn>
+
+                <GridColumn Width="500px" Visible="searchByPJ">
+                    <HeaderTemplate>
+
+                        <label> Encargados </label>
+                    </HeaderTemplate>
+                    <Template>
+
+                        @{
+
+
+                            var thirdPartySelected = context as ThirdPartyDtoResponse;
+                            if (thirdPartySelected.ThirdUsers.Any())
+                            {
+                                <TelerikGrid Data="@thirdPartySelected.ThirdUsers"
+                                             Sortable="true"
+                                             Resizable="false"
+                                             Reorderable="true">
+
+                                    <GridColumns>
+
+
+                                        <GridColumn Width="100px" Visible=@(!thirdPartySelected.Selected) Context="ChildContext">
+                                            <HeaderTemplate>
+
+                                                <label> Seleccionar  </label>
+                                            </HeaderTemplate>
+                                            <Template>
+
+
+                                                @{
+
+
+
+                                                    var thirdUser = ChildContext as ThirdUserDtoResponse;
+
+                                                    <TelerikCheckBox @bind-Value="@thirdUser!.Selected" OnChange="@(() => changeStateThirdUser(thirdUser))">
+                                                    </TelerikCheckBox>
+
+                                                }
+
+
+                                            </Template>
+
+                                        </GridColumn>
+
+
+                                        <GridColumn Width="100px" Visible=@(multipleSelection && showCopiesColumn && !thirdPartySelected.Copy) Context="ChildContext">
+                                            <HeaderTemplate>
+
+                                                <label> Copias  </label>
+                                            </HeaderTemplate>
+                                            <Template>
+
+
+                                                @{
+
+
+
+                                                    var thirdUser = ChildContext as ThirdUserDtoResponse;
+
+                                                    <TelerikCheckBox @bind-Value="@thirdUser!.Copy" OnChange="@(() => ChangeStateThirdUserCopies(thirdUser))">
+
+                                                    </TelerikCheckBox>
+
+                                                }
+
+
+                                            </Template>
+
+                                        </GridColumn>
+
+
+                                        <GridColumn Width="200px" Context="ChildContext">
+                                            <HeaderTemplate>
+
+                                                <label> Nombre  </label>
+                                            </HeaderTemplate>
+                                            <Template>
+
+
+
+                                                @{
+                                                    var thirdUser = ChildContext as ThirdUserDtoResponse;
+                                                    <div class="col">
+                                                        <div class="row">
+                                                            <label> @thirdUser!.Names </label>
+                                                        </div>
+                                                    </div>
+
+
+                                                }
+
+                                            </Template>
+
+
+                                        </GridColumn>
+
+
+
+
+
+                                    </GridColumns>
+
+
+                                </TelerikGrid>
+                            }
+
+                                
+
+
+                        }
+
+
+                    </Template>
+
+                </GridColumn>
+
+
+                <GridColumn Width="300px">
+                    <HeaderTemplate>
+
+                        <label> Correo Electronico</label>
+                    </HeaderTemplate>
+                    <Template>
+                        @{
+
+
+                            var thirdPartySelected = context as ThirdPartyDtoResponse;
+                            <div class="col">
+                                <div class="row">
+                                    <label> @(thirdPartySelected?.Email1 ?? thirdPartySelected?.Email2)</label>
+                                </div>
+                            </div>
+
+
+                        }
+                    </Template>
+
+                </GridColumn>
+
+                <GridColumn Visible="searchByPJ" Width="150px">
+                    <HeaderTemplate>
+
+                        <label> Cargo </label>
+                    </HeaderTemplate>
+                    <Template>
+                        @{
+
+
+                            var thirdPartySelected = context as ThirdPartyDtoResponse;
+                            <div class="col">
+                                <div class="row">
+                                    <label>@(thirdPartySelected?.ChargeName)</label>
+                                </div>
+                            </div>
+
+
+                        }
+                    </Template>
+
+                </GridColumn>
+
+                <GridColumn Width="150px">
+                    <HeaderTemplate>
+
+                        <label> Pais  </label>
+                    </HeaderTemplate>
+                    <Template>
+                        @{
+
+
+                            var thirdPartySelected = context as ThirdPartyDtoResponse;
+                            <div class="col">
+                                <div class="row">
+                                    <label> @(thirdPartySelected?.Country)</label>
+                                </div>
+                            </div>
+
+
+                        }
+
+                    </Template>
+
+                </GridColumn>
+
+                <GridColumn Width="150px">
+                    <HeaderTemplate>
+
+                        <label> Departamento </label>
+                    </HeaderTemplate>
+                    <Template>
+                        @{
+
+
+                            var thirdPartySelected = context as ThirdPartyDtoResponse;
+                            <div class="col">
+                                <div class="row">
+                                    <label> @(thirdPartySelected?.StateC)</label>
+                                </div>
+                            </div>
+
+
+                        }
+                    </Template>
+
+                </GridColumn>
+
+                <GridColumn Width="150px">
+                    <HeaderTemplate>
+
+                        <label> Ciudad  </label>
+                    </HeaderTemplate>
+                    <Template>
+                        @{
+
+
+                            var thirdPartySelected = context as ThirdPartyDtoResponse;
+                            <div class="col">
+                                <div class="row">
+                                    <label> @(thirdPartySelected?.City)</label>
+                                </div>
+                            </div>
+
+
+                        }
+                    </Template>
+
+                </GridColumn>
+
+
+            </GridColumns>
+
+        </TelerikGrid>
+
+    </div>
+
+
+
+</div>

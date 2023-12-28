@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="bootstrap" Version="5.3.2" />
+    <PackageReference Include="CurrieTechnologies.Razor.SweetAlert2" Version="5.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.23" />
+    <PackageReference Include="System.Speech" Version="7.0.0" />
+    <PackageReference Include="Telerik.UI.for.Blazor" Version="5.0.1" />
+    <PackageReference Include="Toolbelt.Blazor.SpeechSynthesis" Version="10.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ControlDoc.CallService\ControlDoc.Services.csproj" />
+  </ItemGroup>
+
+</Project>

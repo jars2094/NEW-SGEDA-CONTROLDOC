@@ -1,0 +1,17 @@
+﻿@* @inject EventAggregatorService EventAggregator *@
+
+@if (InputType == InputTypeEnum.password)
+{
+    <div class="input-group mb-3">
+        <input type="@inputType" @bind="inputValue" placeholder="@Placeholder" class="form-control custom-input" @onfocus="ResetValidation" required />
+        <span class="input-group-text password-toggle-container align-items-center span-custom-class">
+            <i class="@iconClass" style="cursor: pointer; background-color: transparent; " @onclick="TogglePasswordVisibility"></i>
+        </span>
+    </div>
+}
+else
+{
+    <div class="input-group white-border py-1 rounded-3">
+        <input type="@InputType" @bind="inputValue" placeholder="@Placeholder" class="form-control custom-input" @onfocus="ResetValidation" required />
+    </div>
+}

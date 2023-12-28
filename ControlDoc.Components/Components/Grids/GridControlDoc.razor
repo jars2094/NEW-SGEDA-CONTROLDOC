@@ -1,0 +1,108 @@
+﻿@typeparam T
+
+
+
+<TelerikGrid Data="@DataObjectList" PageSize="@PageSize"
+             Sortable="true"
+             FilterMode="GridFilterMode.FilterMenu"
+             Resizable="true"
+             Reorderable="true"
+             EditMode="GridEditMode.Popup"
+             SelectionMode="GridSelectionMode.None">
+    <GridColumns>
+        
+        <GridCommandColumn Width="80px" Title="Editar" HeaderClass="center-wrap" Visible="IsEditColumn">
+            <GridCommandButton OnClick="@((args)=> ShowModalEdit(args.Item as T))" Icon="@SvgIcon.Pencil"></GridCommandButton>
+            <GridCommandButton OnClick="@((args)=> DeleteRecord(args.Item as T))"  Icon="@SvgIcon.Trash"></GridCommandButton>
+        </GridCommandColumn>
+        @for (int i = 0; i < PropertyNames.Count; i++)
+        {
+
+            <GridColumn Field="@PropertyNames[i]" 
+                        Title="@TitlesList[i]"
+                        Width="150px"
+                        Filterable="true"
+                        TextAlign="ColumnTextAlign.Center"
+                        HeaderClass="center-wrap" />
+        }
+    </GridColumns>
+</TelerikGrid>
+
+<style>
+    .k-button-solid-base {
+        border: none;
+        color: #41BAEA;
+        background: none;
+    }
+
+    .k-grid th.center-wrap {
+        justify-content: center;
+        text-align: center;
+        white-space: normal;
+        vertical-align: middle;
+        overflow: hidden; /* Evita que el texto desborde la columna */
+    }
+
+        .k-grid th.center-wrap .k-column-title {
+            white-space: nowrap; /* Evita que el título se divida en varias líneas */
+        }
+
+    div.k-grid-header, div.k-grid-footer {
+        background-color: #F5F5F5;
+    }
+
+    
+
+    .k-grid td {
+        border-bottom-width: 1px;
+        border-color: black;
+        vertical-align: middle;
+        border-right-width: 0;
+        border-left-width: 0;
+    }
+
+    .k-grid-header, .k-header, th.k-header, .k-grid-header-wrap, .k-grouping-header, .k-grouping-header .k-group-indicator, .k-grid td, .k-grid-footer, .k-grid-footer-wrap, .k-grid-content-locked, .k-grid-footer-locked, .k-grid-header-locked, .k-filter-row > td, .k-filter-row > th {
+        font-family: 'Poppins', sans-serif;
+        border-color: black;
+        border-right-width: 0;
+        border-left-width: 0;
+    }
+
+    .k-grid {
+        border: 0px !important;
+    }
+
+        .k-grid .k-grid-aria-root {
+            border-radius: 30px 30px 0px 0px;
+        }
+
+        .k-grid .k-grid-header .k-table {
+            height: 66px !important;
+        }
+
+        .k-grid .k-grid-header .k-table-th {
+            vertical-align: revert !important;
+            font-weight: 600;
+        }
+
+        .k-grid .k-cell-inner {
+            position: relative;
+            top: 0px;
+        }
+
+        .k-grid .k-table-row {
+            height: 62px !important;
+        }
+
+        .k-grid .k-table-th, .k-grid td, .k-grid .k-table-td {
+            border-color: transparent !important;    
+        }
+
+            .k-grid .k-table-th:first-child, .k-grid td:first-child, .k-grid .k-table-td:first-child {
+                display: flex;
+                justify-content: center;
+                top: 14px;
+                position: relative;
+            }
+
+</style>

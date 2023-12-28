@@ -1,0 +1,90 @@
+﻿@page "/DocumentaryTypologiesBag"
+@layout MenuLayout
+
+@using Telerik.DataSource;
+@using static ControlDoc.Models.Models.Administration.Response.DocumentaryTypologiesBagDtoResponse;
+@using ControlDoc.ComponentViews.ComponentViews.GenericViews;
+
+
+<div class="container-fluid mt-1">
+    <ModalDocumentaryTypologiesBag @ref="modalDocumentaryTypologiesBag" IdModalIdentifier="Modal-Documentary-Typologies-Bag" OnChangeData="HandleChangedData"></ModalDocumentaryTypologiesBag>
+    <ModalBondigTypologies @ref="modalDocumentaryTypologiesBondig"></ModalBondigTypologies>
+    <ModalMetaDatosDTB @ref="modalMetaDatosDTB"></ModalMetaDatosDTB>
+
+    <!-- Parte 1: Título y Contenido alineado a la izquierda -->
+    <div class="row titulo">
+        <div class="col-8">
+            <h1>Parametrización -  Bolsa de Tipologías Documentales</h1>
+
+        </div>
+        <!-- Parte 2: Botón azul alineado a la derecha -->
+        <div class="col-4 text-end">
+            <button class="btn btn-primary btn-lg btn-block" @onclick="mostrarModal">Agregar</button>
+        </div>
+    </div>
+ 
+    <!-- Parte 3: Grilla -->
+    <div class="row mt-4">
+        <div class="col">
+
+
+            <TelerikGrid Data="documentaryTypologiesBagList" PageSize="meta.pageSize"
+                         Sortable="true"
+                         FilterMode="GridFilterMode.FilterMenu"
+                         Resizable="true"
+                         Reorderable="true"
+                         EditMode="GridEditMode.Popup"
+                         SelectionMode="GridSelectionMode.None">
+                <GridColumns>
+
+                    <GridCommandColumn Width="100px" Title="Acciones" HeaderClass="center-wrap" Visible="true">
+                        <GridCommandButton Icon="@SvgIcon.Pencil" title="Editar" OnClick="@((args)=> ShowModalEdit(args.Item as DocumentaryTypologiesBagDtoResponse))"></GridCommandButton>
+                        <GridCommandButton Icon="@SvgIcon.Trash" title="Eliminar" OnClick="@((args)=> ShowModalDelete(args.Item as DocumentaryTypologiesBagDtoResponse))"></GridCommandButton>
+                        <GridCommandButton Icon="@SvgIcon.Link" title="Vincular" OnClick="@((args)=> ShowModalBonding(args.Item as DocumentaryTypologiesBagDtoResponse))"></GridCommandButton>
+                        <GridCommandButton Icon="@SvgIcon.FormElement" title="Metadatos" OnClick="@((args)=> ShowModalMetaDatos(args.Item as DocumentaryTypologiesBagDtoResponse))"></GridCommandButton>
+                    </GridCommandColumn>
+                    <GridColumn Field="DocumentaryTypologyBagId"
+                                Title="ID"
+                                Width="150px"
+                                Filterable="true"
+                                TextAlign="ColumnTextAlign.Center"
+                                HeaderClass="center-wrap" />
+                    <GridColumn Field="TypologyName"
+                                Title="Nombre"
+                                Width="150px"
+                                Filterable="true"
+                                TextAlign="ColumnTextAlign.Center"
+                                HeaderClass="center-wrap" />
+                    <GridColumn Field="Active"
+                                Title="Estado"
+                                Width="150px"
+                                Filterable="true"
+                                TextAlign="ColumnTextAlign.Center"
+                                HeaderClass="center-wrap" />
+                    <GridColumn Field="CreateUser"
+                                Title="Usuario Grabo"
+                                Width="150px"
+                                Filterable="true"
+                                TextAlign="ColumnTextAlign.Center"
+                                HeaderClass="center-wrap" />
+                    <GridColumn Field="CreateDate"
+                                Title="Fecha Grabo"
+                                Width="150px"
+                                Filterable="true"
+                                TextAlign="ColumnTextAlign.Center"
+                                HeaderClass="center-wrap" />
+
+                </GridColumns>
+            </TelerikGrid>
+
+
+
+        </div>
+    </div>
+
+    <!-- Parte 4: Botones en la izquierda, centro y derecha -->
+    <PaginationComponent ObjectMeta="meta" T="DocumentaryTypologiesBagDtoResponse" OnPaginationRefresh="HandlePaginationGrid"></PaginationComponent>
+
+</div>
+ <ModalNotificationsComponent @ref="notificationModal" OnModalClosed="HandleModalNotiClose"></ModalNotificationsComponent>
+<ModalNotificationsComponent @ref="notificationModalSucces"></ModalNotificationsComponent> 

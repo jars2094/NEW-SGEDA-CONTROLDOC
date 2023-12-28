@@ -1,0 +1,17 @@
+﻿<!-- NavMenuSubItems.razor -->
+@foreach (var subitem in item.SubItems)
+{
+    <li class="nav-item nav-item-subitem @((item.SubItems).Count == 2 ? "style-2 " : "") @((item.SubItems).Count > 3 ? " style-3 " : "")">
+        <a href="/Home" class="nav-link  @(subitem.ImageChange ? "active" : "" ) "
+           aria-current="page"
+        @onclick="()=>SetActiveItem((sidebarItemsList).IndexOf(subitem))"
+        @onmouseover="()=>Change((sidebarItemsList).IndexOf(subitem))">
+            <img src="@GetIconPath(subitem.ImageChange,subitem.IconPath)" alt=@subitem.ItemName class="icon-buttons" aria-label="Inicio" />
+            <label class="text-item"> @subitem.ItemName</label>
+            @*<div class="text-container">
+                
+            </div>*@
+        </a>
+    </li>
+}
+

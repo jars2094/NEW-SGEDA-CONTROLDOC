@@ -1,0 +1,144 @@
+﻿@page "/FormatMasterList"
+@using System.Text.Json;
+@layout MenuLayout
+
+<PageTitle>FormatMasterList</PageTitle>
+
+
+<ModalFormatMasterList @ref="modalFormatMasterList" OnChangeData="HandleRefreshGridData"></ModalFormatMasterList>
+
+<div class="container-fluid mt-1">
+
+    <!-- Parte 1: Título y Contenido alineado a la izquierda -->
+    <div class="row titulo">
+        <div class="col-8">
+            <h1>Administración - Listado Maestro de Formatos</h1>
+        </div>
+    </div>
+    <div class="row pt-4">
+
+        <!-- Contenedor para los Tres Inputs -->
+        <div class="col-md-8">
+            <div class="row">
+                <!-- Parte Izquierda: Input y Label -->
+                <div class="col-md-4">
+                    <InputModalComponent @ref="CodeInput" @bind-InputValue="code" IsDisabled="false" LabelText="Código" Placeholder="Código" />
+          
+                    <InputModalComponent @ref="NametemplateInput" @bind-InputValue="name" IsDisabled="false" LabelText="Nombre plantilla" Placeholder="Nombre plantilla" />
+                    
+                </div>
+                <!-- Parte Izquierda: Input y Label -->
+                <div class="col-md-4">
+                    <InputModalComponent @ref="VersionInput" @bind-InputValue="version" IsDisabled="false" LabelText="Versión" Placeholder="Versión" InputType="number" />
+               
+                    <InputModalComponent @ref="ProcessInput" @bind-InputValue="process" IsDisabled="false" LabelText="Proceso" Placeholder="Proceso" />
+                
+                </div>
+
+                <!-- Parte Izquierda: Input y Label -->
+                <div class="col-md-4" >
+                    <label for="input2" style="margin-bottom:6px;">Tipo de formato <span class="darkred"></span></label>
+                    <TelerikDropDownList Data="@FormatDoc"
+                                         @bind-Value="@ValueFormatDoc"
+                                         Id="DocTypeJ"
+                                         DefaultText="@textFD"
+                                         TextField="value"
+                                         ValueField="code"
+                                         Filterable="true"
+                                         FilterOperator="StringFilterOperator.Contains"
+                                         >
+                    </TelerikDropDownList>
+                </div>
+            </div>
+        </div>
+        <!-- Contenedor para los Tres Botones -->
+        <div class="col-md-4">
+            <div class="row ">
+                <!-- Parte Derecha: Dos Botones -->
+                <div class="col-md-6 pt-4">
+                    <div class="text-end">
+                        <button class="btn btn-primary btn-lg btn-block botones limpiar" style="width: 64%;" type="button" @onclick=ResetFiltersAsync>Limpiar</button>
+                    </div>
+                </div>
+                <div class="col-md-4 pt-4">
+                    <div class="text-end">
+                        <button class="btn w-100 btn-primary btn-lg btn-block botones guardar" type="submit" @onclick=GetByFilter>Buscar</button>
+                    </div>
+                </div>
+                <!-- Parte Derecha: Un Boton -->
+                <div class="col-md-2 pt-4">
+                    <div class="text-start">
+                        <button class="btn w-50 btn-primary btn-lg btn-block botones guardar d-flex justify-content-center align-items-center" style="border-radius: 10px;" type="submit" @onclick="mostrarModal">
+                            <i class="fas fa-plus"></i>
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <!-- Parte 3: Grilla -->
+    <div class="row mt-4">
+        <div class="col">
+
+
+           <TelerikGrid Data="DocTemplatelist" PageSize="meta.pageSize"
+                         Sortable="true"
+                         FilterMode="GridFilterMode.FilterMenu"
+                         Resizable="true"
+                         Reorderable="true"
+                         EditMode="GridEditMode.Popup"
+                         OnRowExpand="@OnRowExpandHandler"
+                         SelectionMode="GridSelectionMode.None"
+                       >
+
+                <DetailTemplate>
+                    @{
+                        <TelerikGrid Data="DocTemplatelistCode" Pageable="true" PageSize="5">              
+                        <GridColumns>
+                              
+                                <GridColumn Field="TempCode" Title="Código" Width="150px" Filterable="true" TextAlign="ColumnTextAlign.Center" HeaderClass="center-wrap" />
+                                <GridColumn Field="TempName" Title="Nombre Plantilla" Width="150px" Filterable="true" TextAlign="ColumnTextAlign.Center" HeaderClass="center-wrap" />
+                                <GridColumn Field="TempVersion" Title="Versión" Width="150px" Filterable="true" TextAlign="ColumnTextAlign.Center" HeaderClass="center-wrap" />
+                                <GridColumn Field="Process" Title="Proceso" Width="150px" Filterable="true" TextAlign="ColumnTextAlign.Center" HeaderClass="center-wrap" />
+                                <GridColumn Field="CreateUser" Title="Usuario Grabo" Width="150px" Filterable="true" TextAlign="ColumnTextAlign.Center" HeaderClass="center-wrap" />
+                                <GridColumn Field="CreateDate" Title="Fecha Grabación" Width="150px" Filterable="true" TextAlign="ColumnTextAlign.Center" HeaderClass="center-wrap" />
+
+                            </GridColumns>
+                        </TelerikGrid>
+                    }
+                </DetailTemplate>
+
+                <GridColumns>
+
+                     <GridCommandColumn Width="90px" Title="Acciones" HeaderClass="center-wrap" Visible="true">
+                        <GridCommandButton Icon="@SvgIcon.Pencil" title="Editar" OnClick="@((args)=> ShowModalEdit(args.Item as DocTemplateDtoResponse))"></GridCommandButton> 
+                        <GridCommandButton Icon="@SvgIcon.File" OnClick="@((args)=> ShowFileAsync(args.Item as DocTemplateDtoResponse))"></GridCommandButton>
+                        <GridCommandButton Icon="@SvgIcon.Trash" OnClick="@((args)=> ShowModalDelete(args.Item as DocTemplateDtoResponse))"></GridCommandButton>
+                       
+                    </GridCommandColumn>       
+                        <GridColumn Field="TempCode" Title="Código" Width="150px" Filterable="true" TextAlign="ColumnTextAlign.Center" HeaderClass="center-wrap" />
+                        <GridColumn Field="TempName" Title="Nombre Plantilla" Width="150px" Filterable="true" TextAlign="ColumnTextAlign.Center" HeaderClass="center-wrap" />
+                        <GridColumn Field="TempVersion" Title="Versión" Width="150px" Filterable="true" TextAlign="ColumnTextAlign.Center" HeaderClass="center-wrap" />
+                        <GridColumn Field="Process" Title="Proceso" Width="150px" Filterable="true" TextAlign="ColumnTextAlign.Center" HeaderClass="center-wrap" />
+                        <GridColumn Field="CreateUser" Title="Usuario Grabo" Width="150px" Filterable="true" TextAlign="ColumnTextAlign.Center" HeaderClass="center-wrap" />
+                        <GridColumn Field="CreateDate" Title="Fecha Grabación" Width="150px" Filterable="true" TextAlign="ColumnTextAlign.Center" HeaderClass="center-wrap" />
+                    
+                </GridColumns>
+            </TelerikGrid>
+
+
+
+
+
+           
+        </div>
+    </div> 
+    
+    
+    <!-- Parte 4: Botones en la izquierda, centro y derecha -->
+    <PaginationComponent ObjectMeta="meta" T="DocTemplateDtoResponse" OnPaginationRefresh="HandlePaginationGrid"></PaginationComponent>
+</div>
+
+
+<ModalNotificationsComponent @ref="notificationModal" OnModalClosed="HandleModalNotiClose"></ModalNotificationsComponent> 

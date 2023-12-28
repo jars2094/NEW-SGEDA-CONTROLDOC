@@ -1,0 +1,19 @@
+﻿@page "/PruebasInput"
+@layout MenuLayout
+
+
+<InputModalComponent IsRequired="true"
+                     LabelText="Nombre"
+                     Placeholder="Ingrese el Nombre"
+                     FieldType="ValidationType.Name"
+@bind-InputValue="currentValue" />
+
+<!-- Muestra el valor actual -->
+<div>
+    <label>Valor Actual: </label>
+    <span>@currentValue</span>
+</div>
+
+@code {
+    private string currentValue = ""; // Esta propiedad se enlaza con InputModalComponent
+}

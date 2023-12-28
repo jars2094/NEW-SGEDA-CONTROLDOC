@@ -1,0 +1,36 @@
+﻿<PageTitle>Login</PageTitle>
+
+<EditForm Model="@formModel" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ModalComponent @ref="modal"></ModalComponent>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 form-group mb-4">
+                <LabelComponent KeyName=@setKeyName("LabelTextUsuario") For="name-field" AdditionalClasses="mb-2" />
+                <InputComponent @ref="nameInput" InputType=InputTypeEnum.text Placeholder="@setKeyName("PlaceHolderUsuario")" ErrorMessage="El nombre es requerido." ShowErrors="@formSubmitted" />
+            </div>
+            <div class="col-12 form-group mb-4">
+                <LabelComponent KeyName=@setKeyName("LabelTextIngresarContraseña") For="password-field" AdditionalClasses="mb-2" />
+                <InputComponent @ref="passwordInput" InputType=InputTypeEnum.password Placeholder="@setKeyName("PlacerHolderIntroducirContraseña")" ErrorMessage="La contraseña es requerida." ShowErrors="@formSubmitted" />
+            </div>
+
+        </div>
+        <div class="row button-container mb-4">
+            <div class="col-12 text-center mt-2">
+                <CaptchaComponent @ref="captcha" OnCaptchaEntered="OnCaptchaEntered" />
+            </div>
+        </div>
+        <div class="row button-container">
+            <div class="col-12 text-center mt-2">
+                <button class="btn btn-primary btn-lg w-50" type="submit">@setKeyName("ButtonIngresar")</button>
+            </div>
+        </div>
+        <div class="row login-prompt mb-2 mt-2">
+            <div class="col-12 text-center">
+                <span class="login-text">@setKeyName("SpanLoginOlvidarContraseña") </span>
+                <a @onclick="CambiarComponente" class="login-link">@setKeyName("LinkOlvidarContraseña")</a>
+            </div>
+        </div>
+    </div>
+</EditForm>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>ControlDoc</title>
+    <base href="/" />
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+    <link href="css/daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <link href="ControlDoc.FrondEnd.styles.css" rel="stylesheet" />
+    <link href="manifest.json" rel="manifest" />
+    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
+
+    <!-- Telerik -->
+    <!--<link rel="stylesheet" href="https://blazor.cdn.telerik.com/blazor/5.0.1/kendo-theme-bootstrap/all.css" />
+    <script src="https://blazor.cdn.telerik.com/blazor/5.0.1/telerik-blazor.min.js"></script>-->
+    <link rel="stylesheet" href="_content/Telerik.UI.for.Blazor/css/kendo-theme-bootstrap/all.css" />
+    <script src="_content/Telerik.UI.for.Blazor/js/telerik-blazor.js" defer></script>
+    <!-- FonrIcons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://fontawesome.com">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <svg class="loading-progress">
+            <div id="content">
+            </div>
+        </svg>
+        <div class="loading-progress-text"></div>
+    </div>
+
+    <script src="_framework/blazor.webassembly.js"></script>
+    <!--<script src="js/bootstrap/bootstrap.bundle.min.js"></script>-->
+    <script src="js/jquery/jquery-3.7.1.js"></script>
+
+    <script src="js/Components/CodeInput.js"></script>
+    <script src="js/Components/triggerClick.js"></script>
+    <script src="js/Components/pageloadspinner.js"></script>
+    <script src="js/Components/showmodals.js"></script>
+    <script src="_content/CurrieTechnologies.Razor.SweetAlert2/sweetAlert2.min.js"></script>
+    <script src="js/Tooltip.js"></script>
+    <script src="js/site.js"></script>
+    <script src="js/moment/moment.min.js"></script>
+    <!--<script src="js/daterangepicker/daterangepicker.js"></script>-->
+
+    <script>navigator.serviceWorker.register('service-worker.js');</script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+﻿@using ControlDoc.Components.Components.UploadFiles
+
+<div class="my-modal">
+    <TelerikRootComponent>
+
+        <GenericModalComponent Title="Administración - Listado Maestro de Formatos" Width="60%" IsVisible="modalStatus" OnModalClosed="HandleModalClosed">
+            <ChildContent>
+                <EditForm Model="@DocTemplateFormResponse" OnValidSubmit="HandleValidSubmit">
+
+                    <div class="row p-2">
+                        <!-- Parte Izquierda: Input y Label -->
+                        <div class="col-md-3 mt-3">
+                            <InputModalComponent IsDisabled="@IsDisabledCode" @ref="CodeInput" @bind-InputValue="@DocTemplateFormResponse.TempCode" IsRequired="true" LabelText="Código" Placeholder="Ingrese el código" />
+                            
+                            <InputModalComponent @ref="NameTemplateInput" @bind-InputValue="@DocTemplateFormResponse.TempName" IsRequired="true" LabelText="Nombre" Placeholder="Ingrese el nombre" />
+                            <div class="col-md-12">
+                                <label for="input2" style="margin-bottom:6px;">Tipo de formato <span class="red">*</span></label>
+                                <TelerikDropDownList Data="@FormatDoc"
+                                                     @bind-Value="@ValueFormatDoc"
+                                                     Id="DocTypeFor"
+                                                     DefaultText="@textFD"
+                                                     TextField="value"
+                                                     ValueField="code"
+                                                     Filterable="true"
+                                                     FilterOperator="StringFilterOperator.Contains">
+                                </TelerikDropDownList>
+                            </div>
+                            <InputModalComponent @ref="ProcessInput" @bind-InputValue="@DocTemplateFormResponse.Process" IsRequired="false" LabelText="Proceso" Placeholder="Ingrese el proceso" />
+                            <InputModalComponent IsDisabled="true" @ref="VersionInput" @bind-InputValue="@version" IsVisible="@visible" IsRequired="true" LabelText="Versión" Placeholder="Ingrese la versión" />
+                        </div>
+                        <div class="col-md-5 mt-5">
+                        <DragAndDropFilesComponent OnFileListChanged="HandleFilesList" MaxFileSizeMB="100" MaxFileCount="1" AllowedExtensions="@ext"></DragAndDropFilesComponent>
+                        </div>
+                        <!-- Parte Derecha: Dos Botones -->
+                        <div class="col-md-4 mt-3 switch">
+                            <div class="text-end row">
+                                <button class="botones limpiar" type="button" @onclick="ResetFiltersAsync">Limpiar</button>
+                                <button class="botones guardar" type="submit">Guardar</button>
+                            </div>
+
+                            <div class="form-check form-switch ">
+                                <SwitchComponent @bind-CurrentValue="activeState" TextStateActive="Activo" TextStateDisabled="Inactivo" ShowText=false />
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </EditForm>
+                <ModalNotificationsComponent @ref="notificationModal" OnModalClosed="HandleModalNotiClose"></ModalNotificationsComponent>
+            </ChildContent>
+        </GenericModalComponent>
+    </TelerikRootComponent>
+</div>

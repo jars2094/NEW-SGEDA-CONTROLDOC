@@ -1,0 +1,50 @@
+﻿@using static ControlDoc.Components.Components.Input.CodeInputComponent;
+
+
+@* @page "/CodeRecovery"
+@layout LoginLayout
+@using ControlDoc.Control.Services.Features.Interfaces;
+
+@inject IJSRuntime js
+@inject SweetAlertService swal
+@inject IServicios servicios
+@inject HttpClient httpclient
+@inject NavigationManager navigation
+@inject EventAggregatorService EventAggregator *@
+
+<PageTitle>CodeRecovery</PageTitle>
+
+<EditForm Model="@formModel" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ModalComponent @ref="modal"></ModalComponent>
+
+    <div class="row">
+        <div class="form-group mb-5 text-center col-12">
+            <LabelComponent KeyName=@setKeyName("LabelTextRecuperarContraseña") For="name-field" FontSize="24px" IsBold="true" IsCentered="true" />
+        </div>
+        <div class="col-12 form-group mb-5">
+            <LabelComponent KeyName=@setKeyName("LabelTextCodigoEnviado") For="name-field" IsCentered="true" />
+        </div>
+    </div>
+
+    <div class="col-12 form-group mb-5 text-center ">
+        <CodeInputComponent @ref="codeInputComponent"></CodeInputComponent>
+    </div>
+    <TimerComponent TimeDuration="@(TimeSpan.FromSeconds(60))" ResendButtonText="Reenviar código" />
+    <div class="row button-container">
+        <div class="col-12 text-center mt-5">
+            <button class="btn btn-primary btn-lg w-50" type="submit">@setKeyName("ButtonSend")</button>
+        </div>
+    </div>
+    <div class="row login-prompt">
+        <div class="col-12 text-center">
+            <span class="login-text">@setKeyName("SpanYaTienesCuenta")</span>
+            <a href="#" class="login-link" onclick="@(() => ReturnLogin())">@setKeyName("SpanIngresa")</a>
+        </div>
+    </div>
+    <div class="col-12 text-center mt-5 mb-5">
+        <a href="/" class="btn rounded-pill text-white border border-white position-relative" style="background-color: transparent;" onclick="@(() => ReturnLogin())">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+    </div>
+</EditForm>

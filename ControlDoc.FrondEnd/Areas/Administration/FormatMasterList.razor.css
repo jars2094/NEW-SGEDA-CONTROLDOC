@@ -1,0 +1,105 @@
+﻿/*#region CSS Telerik Modal ProfileUsers*/
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/roboto-light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/poppins-regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Nunito";
+    src: url('fonts/nunito-regular.ttf') format('truetype');
+}
+
+.text-filter {
+    font-size: 24px;
+}
+
+.botones-container button {
+    margin-left: 10px;
+    margin-bottom: 6px;
+}
+
+.input-container {
+    margin-bottom: 10px; /* Espacio entre los input-container, ajusta seg�n tus necesidades */
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+    flex: 1;
+    margin-right: 10px;
+}
+
+    .input-container input {
+        margin-right: 10px;
+        border-radius: 6px;
+        padding: 2px;
+        border: 1px solid #7D7D7D;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 32px;
+        width: 300px;
+    }
+
+
+/*botones de arriba*/
+.botones {
+    width: 48%;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    border-width: 2px;
+    border-style: solid;
+    text-align: center; /* Alineaci�n del texto al centro */
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+@media (min-width: 600px) {
+    /* Styles for screens wider than 600px */
+
+    .columna {
+        width: 30%;
+        margin-right: 5%;
+    }
+
+        .columna:last-child {
+            margin-right: 0;
+        }
+}
+
+.botones.guardar {
+    background: #2196F3;
+    color: #fff; /* Agregu� este estilo para asegurarme de que el texto sea visible sobre el fondo azul */
+    border: 1px solid #2196F3;
+}
+
+
+.botones.limpiar {
+    border: 1px solid #2196F3;
+    background: #fff; /* Fondo blanco para el bot�n de limpiar */
+    color: #2C2C2C; /* Color de texto azul para el bot�n de limpiar */
+}
+
+
+.switch {
+    color: aquamarine;
+}
+
+.buttons-save-and-clean {
+    padding-right: 3rem !important;
+}
+

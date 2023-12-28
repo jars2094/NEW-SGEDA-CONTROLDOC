@@ -1,0 +1,247 @@
+﻿@page "/ManagementTray"
+@layout MenuLayout
+
+@using ControlDoc.Components.Components.Switch
+<PageTitle>ManagementTray</PageTitle>
+
+
+<ModalAssociatedResourcesSearch @ref="modalAssociatedFilesSearch"></ModalAssociatedResourcesSearch>
+<ModalSearchRegistration @ref="modalSearchRegistration"></ModalSearchRegistration>
+
+<div class="container-fluid mt-1">
+    <!-- Parte 1: Título y Contenido alineado a la izquierda -->
+    <div class="row titulo">
+        <div class="col-8">
+            <h1>Gestión de trámites - Bandeja de Gestión</h1>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="row">
+
+            <div class="col-md-12">
+                <strong class="mt-2 pt-4 texto" @onclick="mostrarModal">Búsqueda por filtros</strong>
+            </div>
+
+            <div class="col-md-3 pt-3">
+                <label class="text">Clase de comunicación</label>
+                <TelerikDropDownList Data="@FormatCL"
+                                     Value="@ValuePrioridad"
+                                     Id="GR_Prioridad"
+                                     DefaultText="Seleccione una clase..."
+                                     TextField="value"
+                                     ValueField="code"
+                                     Filterable="true"
+                                     FilterOperator="StringFilterOperator.Contains">
+                </TelerikDropDownList>
+            </div>
+
+            <div class="col-md-3 pt-3">
+                <label class="text">Prioridad</label>
+                <TelerikDropDownList Data="@FormatBG"
+                                     Value="@ValuePrioridad"
+                                     Id="GR_Prioridad"
+                                     DefaultText="Seleccione una prioridad..."
+                                     TextField="value"
+                                     ValueField="code"
+                                     Filterable="true"
+                                     FilterOperator="StringFilterOperator.Contains">
+                </TelerikDropDownList>
+            </div>
+
+            <div class="col-md-3 pt-3">
+                <div class="pt-4">
+                    <button class="btn btn-primary btn-lg btn-block botones limpiar" type="button">Limpiar</button>
+                </div>
+            </div>
+
+            <div class=" col-md-3 pt-3">
+                <div class="pt-4">
+                    <button class="btn btn-primary btn-lg btn-block botones guardar" type="submit">Buscar</button>
+                </div>
+            </div>
+            <div class="col-md-3 pt-3">
+                <div class="pt-3">
+                    <InputModalComponent @ref="IdcontrolInput" @bind-InputValue="idcontrol" IsDisabled="false" LabelText="IdControl" Placeholder="IdControl" InputType="number" />
+                </div>
+            </div>
+
+            <div class="col-md-3 pt-3">
+                <div class="pt-3">
+                <InputModalComponent  @ref="NumRadicaInput" @bind-InputValue="NumRadica" IsDisabled="false" LabelText="Número de radicado" Placeholder="Número de radicado"/>
+                </div>
+            </div>
+            <div class="col-md-6 pt-3">
+                <div class="row">
+                    <div class="col-md-2">
+                        <button class="iconboton pt-4 mt-4" type="button"><img src="../img/COPIAS.svg" /></button>
+                    </div>
+                    <div class="col-md-10 pt-5">
+                        <button class="btn btn-primary btn-lg btn-block botones tramite" type="submit" @onclick="OpenModalManagementProcedures">Trámite masivo</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-3 pt-3">
+                <label class ="text">Año</label>
+            
+                <TelerikDropDownList Data="@Year"
+                                     @bind-Value="@YearValue"
+                                     Id="DocTypeJ"
+                                     DefaultText="@textYear"
+                                     TextField="nombre"
+                                     ValueField="valor"
+                                     Filterable="true"
+                                     OnChange="cascadingMes"
+                                     FilterOperator="StringFilterOperator.Contains">
+                </TelerikDropDownList>
+            </div>
+            
+            
+            <div class="col-md-3 pt-3">
+                <label class="text">Mes</label>
+               
+                <TelerikDropDownList Data="@Mounth"
+                                     @bind-Value="@MounthValue"
+                                     Id="DocTypeJ"
+                                     DefaultText="@textMes"
+                                     TextField="nombre"
+                                     ValueField="valor"
+                                     Filterable="true"
+                                     Enabled="EnabledMes"
+                                     OnChange="cascadingDia"
+                                     FilterOperator="StringFilterOperator.Contains">
+                </TelerikDropDownList>
+            </div>
+
+            <div class="col-md-3 pt-3">
+                <label class="text">Día</label>
+                
+                <TelerikDropDownList Data="@Days"
+                @bind-Value="@DaysValue"
+                                     Id="DocTypeJ"
+                                     DefaultText="@textDia"
+                                     TextField="nombre"
+                                     ValueField="valor"
+                                     Filterable="true"
+                                     Enabled="EnabledDia"
+                                     
+                                     FilterOperator="StringFilterOperator.Contains">
+                </TelerikDropDownList>
+            </div>
+
+            <div class="col-md-3 pt-3">
+                <div class="form-check form-switch switchPosition">
+                    <SwitchComponent @bind-CurrentValue="activeState" TextStateActive="Por fecha de vencimiento" TextStateDisabled="Por fecha de vencimiento" ShowText=false />
+                </div>
+            </div>
+           
+        </div>
+    </div>
+
+    <!--  Dona y cartas -->
+    <div class="col-md-6 pt-86">
+        <div class="row">
+          
+                    <!-- Tarjeta 1 -->
+                    <div class=" col-md-4 mb-3">
+                        <!-- Contenido de la tarjeta 1 -->
+                        <DynamicCardGestionComponent BorderColor="#AB2222"
+                                                     LabelText="En proceso"
+                                                     CardNumber="@EP" />
+                    </div>
+                    <!-- Tarjeta 2 -->
+                    <div class="col-md-4 mb-3">
+                        <!-- Contenido de la tarjeta 2 -->
+                        <DynamicCardGestionComponent BorderColor="#EAD519"
+                                                     LabelText="En trámite"
+                                                     CardNumber="@ET"
+                                                      />
+                    </div>
+
+                    <!-- Tarjeta 3 -->
+                    <div class="col-md-4 mb-3">
+                        <!-- Contenido de la tarjeta 4 -->
+                        <DynamicCardGestionComponent BorderColor="#82A738"
+                                                     LabelText="Gestión exitosa"
+                                                     CardNumber="@GEX"
+                                                      />
+                    </div>
+                   
+                        <div class="row">
+                            <div class="col-md-12 pt-3">
+                                <TelerikChart>
+                                    <ChartSeriesItems>
+                                        <ChartSeries Type="ChartSeriesType.Donut"
+                                                     Data="@Data"
+                                                     Field="@nameof(ModelData.SegmentValue)"
+                                                    >
+                                            <ChartSeriesTooltip Visible="true" Context="item">
+                                                <Template>
+                                                    @item.Percentage.ToString("P")
+                                                </Template>
+                                            </ChartSeriesTooltip>
+
+                                        </ChartSeries>
+                                    </ChartSeriesItems>
+
+                                    <ChartLegend Visible=true Position="ChartLegendPosition.Right">
+                                    </ChartLegend>
+                                </TelerikChart>
+                            </div>
+                            <div class="col-md-12 d-flex justify-content-center">
+                                <strong class="mt-3 textCount">Total de trámites: @Total</strong>
+                            </div>
+                        </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row col-md-12">
+    <div class="col-md-12">
+        <strong class="mt-2 pt-4 texto">Estado: @Estado</strong>
+    </div>
+    <div class="col-md-12">
+        @* <TelerikGrid Data="DataGridET" PageSize="meta.pageSize"
+                     Sortable="true"
+                     FilterMode="GridFilterMode.FilterMenu"
+                     Resizable="true"
+                     Reorderable="true"
+                     EditMode="GridEditMode.Popup"
+                     SelectionMode="GridSelectionMode.None">
+            <GridColumns>
+                <GridCommandColumn Width="80px" Title="Selección" HeaderClass="center-wrap" Visible="true"> </GridCommandColumn>
+
+                <GridCommandColumn Width="80px" Title="Acciones" HeaderClass="center-wrap" Visible="true">
+                    @* <GridCommandButton Icon="@SvgIcon.Pencil" OnClick="@((args)=> ShowModalEdit(args.Item as CompaniesDtoResponse))"></GridCommandButton>
+                    <GridCommandButton Icon="@SvgIcon.Trash" OnClick="@((args)=> ShowModalDelete(args.Item as CompaniesDtoResponse))"></GridCommandButton> 
+                </GridCommandColumn>
+
+                <GridColumn Field="PhoneNumber" Title="Fecha radicación" Width="150px" Filterable="true" TextAlign="ColumnTextAlign.Center" HeaderClass="center-wrap" />
+                <GridColumn Field="CellPhoneNumber" Title="Fecha vencimiento" Width="150px" Filterable="true" TextAlign="ColumnTextAlign.Center" HeaderClass="center-wrap" />
+                <GridColumn Field="Address" Title="Descripción del trámite" Width="150px" Filterable="true" TextAlign="ColumnTextAlign.Center" HeaderClass="center-wrap" />
+                <GridColumn Field="Email" Title="Firmante/Destinatario" Width="150px" Filterable="true" TextAlign="ColumnTextAlign.Center" HeaderClass="center-wrap" />
+                <GridColumn Field="WebAddress" Title="Tipología documental" Width="150px" Filterable="true" TextAlign="ColumnTextAlign.Center" HeaderClass="center-wrap" />
+                
+            </GridColumns>
+        </TelerikGrid> *@
+
+    </div>
+</div>
+<ModalManagementOfProcedures @ref="managementOfProcedures"></ModalManagementOfProcedures>
+
+
+
+
+
+
+  
+   
+               
+

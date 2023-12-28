@@ -1,0 +1,168 @@
+﻿@page "/DocumentsTask"
+@layout MenuLayout
+
+<h3>Bandeja de Tareas Documentales</h3>
+
+<div class="card row mt-3 col-12">
+    <div class="card-body">
+        <div class="col-12 mb-3">
+            <h3 class="style-bg"><b>Mis Tareas</b></h3>
+        </div>
+        <div class="row d-flex justify-content-around pb-4">
+            <!-- Tarjeta 1 -->
+            <div class="col-6 col-lg-4 col-xl-2 col-md-6 col-sm-12 mb-3">
+                <!-- Contenido de la tarjeta 1 -->
+                <DynamicCardComponent BorderColor="#CB4A33"
+                                      ShadowColor="#CB4A33"
+                                      ImageUrl="../img/docCreado.svg"
+                                      LabelText="Doc Creados"
+                                      CardNumber="@created" />
+            </div>
+            <!-- Tarjeta 2 -->
+            <div class="col-6 col-lg-4 col-xl-2 col-md-6 col-sm-12 mb-3">
+                <!-- Contenido de la tarjeta 2 -->
+                <DynamicCardComponent BorderColor="#01B0B2"
+                                      ShadowColor="#01B0B2"
+                                      ImageUrl="../img/docRevisar.svg"
+                                      LabelText="Doc por Revisar"
+                                      CardNumber="@review" />
+            </div>
+            <!-- Tarjeta 3 -->
+            <div class="col-6 col-lg-4 col-xl-2 col-md-6 col-sm-12 mb-3">
+                <!-- Contenido de la tarjeta 3 -->
+                <DynamicCardComponent BorderColor="#92376F"
+                                      ShadowColor="#92376F"
+                                      ImageUrl="../img/docAprobar.svg"
+                                      LabelText="Doc por Aprobar"
+                                      CardNumber="@approve" />
+            </div>
+            <!-- Tarjeta 4 -->
+            <div class="col-6 col-lg-6 col-xl-2 col-md-6 col-sm-12 mb-3">
+                <!-- Contenido de la tarjeta 4 -->
+                <DynamicCardComponent BorderColor="#B8364F"
+                                      ShadowColor="#B8364F"
+                                      ImageUrl="../img/docFirmar.svg"
+                                      LabelText="Doc por Firmar"
+                                      CardNumber="@signed" />
+            </div>
+            <!-- Tarjeta 5 -->
+            <div class="col-6 col-lg-6 col-xl-2 col-md-6 col-sm-12 mb-3">
+                <!-- Contenido de la tarjeta 5 -->
+                <DynamicCardComponent BorderColor="#12A955"
+                                      ShadowColor="#12A955"
+                                      ImageUrl="../img/docFirmado.svg"
+                                      LabelText="Doc Firmado"
+                                      CardNumber="@involved" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card row mt-3 col-12">
+    <div class="card-body">
+        <div class="d-flex flex-xl-row flex-column">
+            <div class="col-8 mb-3 d-flex flex-row gap-5">
+                <h3 class="col-xl-4 col-8 style-bg"><b>Búsqueda por filtros</b></h3>
+            </div>
+        </div>
+        <div class="row d-flex">
+            <div class="col-xl-3">
+                <InputModalComponent @ref="docTaskInput" IsDisabled="false" IsVisible="true" LabelText="Id Tarea Documental" Placeholder=""></InputModalComponent>
+            </div>
+            <div class="col-xl-2 mt-4 form-check form-switch">
+                <label class="mt-2"><TelerikSwitch @bind-Value="@activeState" /> Filtrar por fechas</label>
+            </div>
+            <div class="col-xl-3 mt-4">
+                <div class="mt-2">
+                    <TelerikDatePicker @bind-Value="@StartValue"
+                                       Format="MMMM dd yyyy">
+                    </TelerikDatePicker>
+                </div>
+            </div>
+            <div class="col-xl-3 mt-4">
+                <div class="mt-2">
+                    <TelerikDatePicker @bind-Value="@EndValue"
+                                       Format="MMMM dd yyyy">
+                    </TelerikDatePicker>
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex flex-lg-row flex-column">
+            <div class="col-xl-6 mt-4">
+                <label style="margin-bottom:6px;">Asunto <span style="color:gray"></span></label>
+                <textarea @bind="descriptionInput" class="w-100 custom-textarea" id="DT_Asunto" placeholder="Informacion del trámite. Máx 500 caracteres" maxlength="500"></textarea>
+            </div>
+            <div class="col-xl-3 mt-4">
+                <InputModalComponent @ref="userInput" IsDisabled="false" IsVisible="true" LabelText="Usuario" Placeholder=""></InputModalComponent>
+            </div>
+            <div class="col-xl-3 mt-5">
+                <button class="botones-limpiar btn-style mt-2" type="button">Limpiar</button>
+                <button class="btn btn-primary btn-lg btn-block btn-style mt-3" type="button" @onclick="GetDocumentsTaskFilter">Buscar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-3">
+    <TelerikGrid Data="documentaryTaskList"
+                 Sortable="true"
+                 FilterMode="GridFilterMode.FilterMenu"
+                 Resizable="true"
+                 Reorderable="true"
+                 EditMode="GridEditMode.Popup"
+                 SelectionMode="GridSelectionMode.None">
+        <GridColumns>
+
+            <GridCommandColumn Width="80px" Title="Acciones" HeaderClass="center-wrap" Visible="true">
+                <GridCommandButton Icon="@SvgIcon.Trash"></GridCommandButton>
+            </GridCommandColumn>
+            <GridColumn Field="TaskId"
+                        Title="ID Tarea"
+                        Width="150px"
+                        Filterable="true"
+                        TextAlign="ColumnTextAlign.Center"
+                        HeaderClass="center-wrap" />
+            <GridColumn Field="ControlId"
+                        Title="ID Control"
+                        Width="150px"
+                        Filterable="true"
+                        TextAlign="ColumnTextAlign.Center"
+                        HeaderClass="center-wrap" />
+            <GridColumn Field="Class"
+                        Title="Clase"
+                        Width="150px"
+                        Filterable="true"
+                        TextAlign="ColumnTextAlign.Center"
+                        HeaderClass="center-wrap" />
+            <GridColumn Field="UserTaskName"
+                        Title="Enviado a"
+                        Width="150px"
+                        Filterable="true"
+                        TextAlign="ColumnTextAlign.Center"
+                        HeaderClass="center-wrap" />
+            <GridColumn Field="Enviado por"
+                        Title="Usuario Grabo"
+                        Width="150px"
+                        Filterable="true"
+                        TextAlign="ColumnTextAlign.Center"
+                        HeaderClass="center-wrap" />
+            <GridColumn Field="TaskDate"
+                        Title="Fecha Creación"
+                        Width="150px"
+                        Filterable="true"
+                        TextAlign="ColumnTextAlign.Center"
+                        HeaderClass="center-wrap" />
+            <GridColumn Field="TaskDescription"
+                        Title="Asunto"
+                        Width="150px"
+                        Filterable="true"
+                        TextAlign="ColumnTextAlign.Center"
+                        HeaderClass="center-wrap" />
+            <GridColumn Field="Process"
+                        Title="Proceso"
+                        Width="150px"
+                        Filterable="true"
+                        TextAlign="ColumnTextAlign.Center"
+                        HeaderClass="center-wrap" />
+        </GridColumns>
+    </TelerikGrid>
+</div>
+
