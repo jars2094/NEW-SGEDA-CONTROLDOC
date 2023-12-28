@@ -1,9 +1,0 @@
-﻿.card-shadow-info {
-    border-radius: 8px;
-    background: #FFFFFF;
-    font-family: 'Roboto', sans-serif;
-    box-sizing: border-box;
-    transition: transform 0.3s ease, box-shadow 0.3s;
-    box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.50) !important;
-    width: 100%;
-}
